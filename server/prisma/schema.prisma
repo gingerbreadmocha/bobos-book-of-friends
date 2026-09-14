@@ -1,0 +1,78 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Cat {
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String  @db.VarChar(100)
+  avatarUrl String?
+
+  // Personality generated from quiz
+  personality Json
+
+  ownerId String @db.Uuid
+  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  messages ChatMessage[]
+
+  // Number of times this cat has been added by other users
+  popularity Int @default(0)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  userCats  UserCat[]
+
+  @@index([ownerId])
+}
+
+model User {
+  id           String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  username     String @db.VarChar(20)
+  email        String @unique
+  passwordHash String @map("password_hash")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cats         Cat[]
+  userCats     UserCat[]
+  chatMessages ChatMessage[]
+
+  @@map("users")
+}
+
+model ChatMessage {
+  id      String @id @default(cuid())
+  role    String
+  content String
+
+  catId String @db.Uuid
+  cat   Cat    @relation(fields: [catId], references: [id], onDelete: Cascade)
+
+  userId String @db.Uuid
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([catId, createdAt])
+}
+
+model UserCat {
+  id String @id @default(cuid())
+
+  userId String @db.Uuid
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  catId String @db.Uuid
+  cat   Cat    @relation(fields: [catId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, catId])
+  @@index([userId])
+  @@index([catId])
+}
