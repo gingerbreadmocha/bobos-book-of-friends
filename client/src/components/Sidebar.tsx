@@ -10,7 +10,7 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 export function Sidebar() {
   return (
-    <aside className="hidden md:flex h-screen w-80 shrink-0 bg-violet-100 flex-col p-8">
+    <aside className="hidden md:flex h-full min-h-dvh w-80 shrink-0 overflow-y-auto bg-violet-100 flex-col p-8 sticky top-0">
       <img src="sidebar/cathat_logo.png" alt="Cat chat" />
       <span className="text-violet-900">Real cats. Real chats.</span>
 
