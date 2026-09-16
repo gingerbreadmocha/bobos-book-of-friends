@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors"
 import authRouter from "./routes/auth.js";
 import imageUploadRouter from "./routes/imageUpload.js";
+import catsRouter from "./routes/cats.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,6 +26,8 @@ app.use(express.json());
 app.use("/api", authRouter);
 
 app.use("/api", imageUploadRouter);
+
+app.use("/api", catsRouter);
 
 // Fallback for unhandled /api routes.
 app.use("/api", (req, res) => {
