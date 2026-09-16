@@ -13,10 +13,15 @@ import { CreateCatPage } from "./pages/CreateCatPage";
 
 function Layout() {
   return (
-    <div className="flex h-dvh bg-amber-50">
+    <div className="flex bg-amber-50">
       <Sidebar />
-      <main className="flex-1 flex items-center justify-center p-0 md:p-6">
-        <Outlet />
+      {/* `main` is the scroll container; centering lives on an inner wrapper
+          so overflowing content (e.g. the tall create-cat form) scrolls edge to
+          edge instead of producing phantom whitespace below the page. */}
+      <main className="flex-1 min-h-0 h-full">
+        <div className="flex min-h-full items-center justify-center p-0 md:p-6">
+          <Outlet />
+        </div>
       </main>
     </div>
   );
