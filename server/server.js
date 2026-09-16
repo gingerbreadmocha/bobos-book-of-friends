@@ -1,7 +1,8 @@
 import 'dotenv/config';
 import express from "express";
 import cors from "cors"
-import { ImageKit } from '@imagekit/nodejs';
+import authRouter from "./routes/auth.js";
+import imageUploadRouter from "./routes/imageUpload.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,22 +22,20 @@ app.use(cors({
 
 app.use(express.json());
 
+app.use("/api", authRouter);
 
-const imageKit = new ImageKit({
-    privateKey: process.env.IMAGEKIT_PRIVATE_KEY
-})
+app.use("/api", imageUploadRouter);
 
-app.get("/api/imagekit/auth", (req, res) => {
-    ('imagekit auth being called');
-    const { token, expire, signature } = imageKit.helper.getAuthenticationParameters();
+// Fallback for unhandled /api routes.
+app.use("/api", (req, res) => {
+    res.status(404).json({ error: "Not found" });
+});
 
-    res.json({
-        token,
-        expire,
-        signature,
-        publicKey: process.env.IMAGEKIT_PUBLIC_KEY
-    })
-})
+// Central error handler: Express forwards thrown/rejected errors here.
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).json({ error: "Something went wrong." });
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
