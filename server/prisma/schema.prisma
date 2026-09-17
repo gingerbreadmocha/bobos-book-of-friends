@@ -7,9 +7,10 @@ generator client {
 }
 
 model Cat {
-  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name      String  @db.VarChar(100)
-  avatarUrl String?
+  id          String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String  @db.VarChar(100)
+  avatarUrl   String?
+  description String?
 
   // Personality generated from quiz
   personality Json

@@ -1,8 +1,7 @@
 import { Router } from "express";
 import { prisma } from "../db/db.js";
 
-const DEFAULT_PER_PAGE = 15;
-const MAX_PER_PAGE = 100;
+const DEFAULT_PER_PAGE = 16;
 
 const router = Router();
 
@@ -34,11 +33,9 @@ router.get("/cats", async (req, res) => {
         cats,
         pagination: {
             page,
-            perPage,
             total,
             totalPages,
             hasNext: page < totalPages,
-            hasPrev: page > 1,
         },
     });
 });
