@@ -1,4 +1,4 @@
-import { RadioGroup, RadioGroupItem } from "../../../components/ui/radio-group";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "cn";
 
 export type PersonalityAnswers = Record<string, string>;
