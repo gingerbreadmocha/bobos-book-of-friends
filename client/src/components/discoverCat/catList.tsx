@@ -1,10 +1,16 @@
-import { useEffect, useRef } from "react";
-import { useGetCats } from "@/hooks/useGetCats";
+import { useEffect, useRef, useState } from "react";
+import { useGetCats, type Cat } from "@/hooks/useGetCats";
 import { ProfileCard } from "@/components/discoverCat/profileCard";
+import { CatDetailSidebar } from "@/components/discoverCat/catDetailSidebar";
 
 export const CatList = () => {
   const { cats, loading, hasMore, loadMore } = useGetCats();
   const sentinelRef = useRef<HTMLDivElement | null>(null);
+
+  // Which cat's detail sidebar is on screen. `selectedCat` is kept while the
+  // panel is closing so the exit animation still has content to show.
+  const [selectedCat, setSelectedCat] = useState<Cat | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const loadingRef = useRef(loading);
   useEffect(() => {
@@ -29,12 +35,17 @@ export const CatList = () => {
     return () => observer.disconnect();
   }, [hasMore, loadMore]);
 
+  const handleSelectCat = (cat: Cat) => {
+    setSelectedCat(cat);
+    setSidebarOpen(true);
+  };
+
   return (
     <>
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {cats.map((cat) => (
           <li key={cat.id}>
-            <ProfileCard cat={cat} />
+            <ProfileCard cat={cat} onSelect={handleSelectCat} />
           </li>
         ))}
       </ul>
@@ -54,6 +65,12 @@ export const CatList = () => {
           You&apos;ve reached the end of the cat library!
         </p>
       )}
+
+      <CatDetailSidebar
+        cat={selectedCat}
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
     </>
   );
 };

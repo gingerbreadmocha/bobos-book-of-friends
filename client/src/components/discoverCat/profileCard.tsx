@@ -1,28 +1,13 @@
-import { useMemo } from "react";
+import { useMemo, type KeyboardEvent, type MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import type { Cat } from "@/hooks/useGetCats";
 import { Button } from "@/components/ui/button";
 import { getRandomAvatar } from "@/utils/getRandomAvatar";
 import { cn } from "cn";
-
-const PERSONALITY_TAG_COLORS = {
-  energy: "bg-yellow-200 text-yellow-800",
-  affection: "bg-red-200 text-red-800",
-  vocal: "bg-cyan-200 text-cyan-800",
-  strangers: "bg-purple-200 text-purple-800",
-  cats: "bg-lime-200 text-lime-800",
-  favoriteActivity: "bg-orange-200 text-orange-800",
-  whenWantingSomething: "bg-pink-200 text-pink-800",
-};
+import { getAllPersonalityTags } from "./personalityTags";
 
 function pickRandomTags(personality: Record<string, unknown>) {
-  const availableTags = Object.entries(PERSONALITY_TAG_COLORS).flatMap(
-    ([key, className]) => {
-      const value = personality[key];
-      if (typeof value !== "string" || value.trim() === "") return [];
-      return [{ label: value, className }];
-    },
-  );
+  const availableTags = getAllPersonalityTags(personality);
 
   for (let i = availableTags.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -35,9 +20,11 @@ type ProfileCardProps = {
   cat: Cat;
   /** Override the default "chat" behavior (which opens the /cat page). */
   onChat?: (cat: Cat) => void;
+  /** Called when the card is clicked to open the cat's detail sidebar. */
+  onSelect?: (cat: Cat) => void;
 };
 
-export function ProfileCard({ cat, onChat }: ProfileCardProps) {
+export function ProfileCard({ cat, onChat, onSelect }: ProfileCardProps) {
   const navigate = useNavigate();
 
   const pictureSrc = cat.avatarUrl ? cat.avatarUrl : getRandomAvatar();
@@ -46,7 +33,10 @@ export function ProfileCard({ cat, onChat }: ProfileCardProps) {
     [cat.personality],
   );
 
-  const handleChat = () => {
+  const handleChat = (event: MouseEvent<HTMLButtonElement>) => {
+    // Clicking "Chat" is an action inside the card, so don't also open the
+    // detail sidebar.
+    event.stopPropagation();
     if (onChat) {
       onChat(cat);
     } else {
@@ -54,10 +44,28 @@ export function ProfileCard({ cat, onChat }: ProfileCardProps) {
     }
   };
 
+  const handleSelect = () => {
+    onSelect?.(cat);
+  };
+
+  const handleCardKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleSelect();
+    }
+  };
+
   const truncatedDescription = cat?.description.slice(0, 100) + "...";
 
   return (
-    <article className="flex flex-col overflow-hidden rounded-2xl border-2 border-violet-200 bg-white/70 shadow-sm transition-shadow duration-150 hover:shadow-md max-w-[300px] min-h-[500px] justify-center items-center pt-4">
+    <article
+      aria-label={`View ${cat.name}'s full profile`}
+      role="button"
+      tabIndex={0}
+      onClick={handleSelect}
+      onKeyDown={handleCardKeyDown}
+      className="flex flex-col overflow-hidden rounded-2xl border-2 border-violet-200 bg-white/70 shadow-sm transition-shadow duration-150 hover:shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 max-w-[300px] min-h-[500px] justify-center items-center pt-4"
+    >
       <img
         src={pictureSrc}
         alt={cat.avatarUrl ? `${cat.name}'s photo` : `${cat.name} avatar`}
@@ -77,7 +85,7 @@ export function ProfileCard({ cat, onChat }: ProfileCardProps) {
           >
             {personalityTags.map((tag) => (
               <li
-                key={tag.label}
+                key={tag.id}
                 className={cn(
                   "rounded-full px-3 py-1 text-sm font-medium",
                   tag.className,
