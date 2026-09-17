@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { useUser } from "@/context/user-context";
+import { Button } from "@/components/ui/button";
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   [
@@ -8,7 +10,30 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
       : "text-violet-900 hover:bg-violet-100 focus:bg-violet-300 active:bg-violet-300",
   ].join(" ");
 
+/** Shared styling for the account button so the signed-in/out states match. */
+const accountButtonClass =
+  "mt-4 flex flex-row h-auto gap-0 border-0 rounded-md px-6 py-3 text-base font-normal whitespace-normal bg-violet-950 text-gray-200 shadow-md transition-colors duration-150 hover:bg-violet-900 focus:outline-none focus:ring-2 focus:ring-violet-400 focus-visible:ring-2 focus-visible:ring-violet-400 active:bg-violet-950 active:not-aria-[haspopup]:translate-y-0";
+
+const accountIcon = (
+  <svg
+    className="size-10"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    width="40"
+    height="40"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
+      clip-rule="evenodd"
+    />
+  </svg>
+);
+
 export function Sidebar() {
+  const { user, isAuthenticated, showAuth, logout } = useUser()
   return (
     <aside className="hidden md:flex h-full min-h-dvh w-80 shrink-0 overflow-y-auto bg-violet-100 flex-col p-8 sticky top-0">
       <img src="sidebar/cathat_logo.png" alt="Cat chat" />
@@ -106,24 +131,23 @@ export function Sidebar() {
           alt="Shelf"
           className="w-56 h-auto -mb-8"
         />
-        <button className="mt-4 px-6 py-3 bg-violet-950 text-gray-200 rounded-md shadow-md hover:bg-violet-900 focus:outline-none focus:ring-2 focus:ring-violet-400 active:bg-violet-950 transition-colors duration-150 flex flex-row">
-          <svg
-            className="h-10"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            width="40"
-            height="40"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <span>Sign in to like, save or create cats!</span>
-        </button>
+        {isAuthenticated ? (
+          <>
+            <p className="mt-4 text-center text-violet-950">
+              Signed in as{" "}
+              <span className="font-semibold">{user?.username}</span>
+            </p>
+            <Button className={accountButtonClass} onClick={logout}>
+              {accountIcon}
+              <span>Sign out</span>
+            </Button>
+          </>
+        ) : (
+          <Button className={accountButtonClass} onClick={showAuth}>
+            {accountIcon}
+            <span>Sign in to like, save or create cats!</span>
+          </Button>
+        )}
       </div>
     </aside>
   );

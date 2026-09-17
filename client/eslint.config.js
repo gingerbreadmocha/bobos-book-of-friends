@@ -19,4 +19,15 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  {
+    // Vendored shadcn/ui components deliberately export non-component values
+    // (e.g. `buttonVariants` in button.tsx, `badgeVariants`, `useSidebar`) that
+    // other registry items import -- calendar.tsx imports `buttonVariants`.
+    // A per-file eslint-disable would be lost the next time `npx shadcn add`
+    // rewrites one of these files, so the exception lives here instead.
+    files: ['src/components/ui/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 ])
