@@ -1,6 +1,7 @@
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { useNavigate } from "react-router-dom";
 import type { Cat } from "@/hooks/useGetCats";
+import { useCat } from "@/context/cat-context";
 import { Button } from "@/components/ui/button";
 import { getRandomAvatar } from "@/utils/getRandomAvatar";
 import { cn } from "cn";
@@ -19,11 +20,14 @@ export function CatDetailSidebar({
   onClose,
 }: CatDetailSidebarProps) {
   const navigate = useNavigate();
+  const { selectCat } = useCat();
 
   const pictureSrc = cat?.avatarUrl ? cat.avatarUrl : getRandomAvatar();
   const personalityTags = cat ? getAllPersonalityTags(cat.personality) : [];
 
   const handleChat = () => {
+    // Save the cat we're chatting with so the chat page knows who it's for.
+    if (cat) selectCat(cat);
     navigate("/cat");
   };
 

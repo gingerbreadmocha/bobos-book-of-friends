@@ -1,6 +1,7 @@
 import { useMemo, type KeyboardEvent, type MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import type { Cat } from "@/hooks/useGetCats";
+import { useCat } from "@/context/cat-context";
 import { Button } from "@/components/ui/button";
 import { getRandomAvatar } from "@/utils/getRandomAvatar";
 import { cn } from "cn";
@@ -26,6 +27,7 @@ type ProfileCardProps = {
 
 export function ProfileCard({ cat, onChat, onSelect }: ProfileCardProps) {
   const navigate = useNavigate();
+  const { selectCat } = useCat();
 
   const pictureSrc = cat.avatarUrl ? cat.avatarUrl : getRandomAvatar();
   const personalityTags = useMemo(
@@ -37,6 +39,8 @@ export function ProfileCard({ cat, onChat, onSelect }: ProfileCardProps) {
     // Clicking "Chat" is an action inside the card, so don't also open the
     // detail sidebar.
     event.stopPropagation();
+    // Save the cat we're chatting with so the chat page knows who it's for.
+    selectCat(cat);
     if (onChat) {
       onChat(cat);
     } else {
