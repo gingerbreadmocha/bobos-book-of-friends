@@ -42,6 +42,25 @@ router.get("/cats", async (req, res) => {
 });
 
 /**
+ * GET /api/my-cats
+ * Returns the cats owned by the signed-in user (newest first).
+ */
+router.get("/my-cats", async (req, res) => {
+    const ownerId = getAuthenticatedUserId(req);
+    if (!ownerId) {
+        return res.status(401).json({ error: "Sign in to view your cats." });
+    }
+
+    const cats = await prisma.cat.findMany({
+        where: { ownerId },
+        orderBy: { createdAt: "desc" },
+        include: { owner: { select: { id: true, username: true } } },
+    });
+
+    res.json({ cats });
+});
+
+/**
  * POST /api/cats
  */
 router.post("/cats", async (req, res) => {
