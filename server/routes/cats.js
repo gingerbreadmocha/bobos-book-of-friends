@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { prisma } from "../db/db.js";
+import { getAuthenticatedUserId } from "../utils/auth.js";
 
 const DEFAULT_PER_PAGE = 16;
 
@@ -38,6 +39,37 @@ router.get("/cats", async (req, res) => {
             hasNext: page < totalPages,
         },
     });
+});
+
+/**
+ * POST /api/cats
+ */
+router.post("/cats", async (req, res) => {
+    const ownerId = getAuthenticatedUserId(req);
+    if (!ownerId) {
+        return res.status(401).json({ error: "Sign in to create a cat." });
+    }
+
+    // TODO: ADD Validations
+
+    try {
+        let cat;
+        cat = await prisma.cat.create({
+            data: {
+                name: req.body.name,
+                avatarUrl: req.body.avatarUrl || null,
+                description: req.body.description || null,
+                personality: req.body.personality,
+                ownerId: ownerId,
+            },
+            include: { owner: { select: { id: true, username: true } } },
+        });
+
+        res.status(201).json(cat);
+    } catch (err) {
+        console.log('err ', err);
+        return res.status(500).json({ error: "Failed to create cat." });
+    }
 });
 
 export default router;
