@@ -39,9 +39,9 @@ export function CatDetailSidebar({
       }}
     >
       <DialogPrimitive.Portal>
-        <DialogPrimitive.Backdrop className="fixed inset-0 isolate z-50 bg-violet-950/30 duration-100 backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out" />
+        <DialogPrimitive.Backdrop className="fixed inset-0 isolate z-50 bg-overlay/30 duration-100 backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out" />
 
-        <DialogPrimitive.Popup className="fixed inset-y-0 right-0 z-50 flex w-full max-w-md flex-col bg-violet-300 text-violet-950 p-6 sm:p-8 duration-150 overflow-y-auto shadow-2xl outline-none data-open:animate-in data-open:slide-in-from-right-full data-closed:animate-out data-closed:slide-out-to-right-full">
+        <DialogPrimitive.Popup className="fixed inset-y-0 right-0 z-50 flex w-full max-w-md flex-col bg-accent-strong text-foreground p-6 sm:p-8 duration-150 overflow-y-auto shadow-2xl outline-none data-open:animate-in data-open:slide-in-from-right-full data-closed:animate-out data-closed:slide-out-to-right-full">
           {cat && (
             <>
               <DialogPrimitive.Close
@@ -65,11 +65,11 @@ export function CatDetailSidebar({
                   }
                   className="h-44 w-44 rounded-full shrink-0 object-cover"
                 />
-                <DialogPrimitive.Title className="mt-4 text-2xl font-semibold text-violet-950">
+                <DialogPrimitive.Title className="mt-4 text-2xl font-semibold text-foreground">
                   {cat.name}
                 </DialogPrimitive.Title>
                 {cat.owner && (
-                  <p className="mt-1 text-sm text-violet-700">
+                  <p className="mt-1 text-sm text-foreground-subtle">
                     by {cat.owner.username}
                   </p>
                 )}
@@ -82,7 +82,7 @@ export function CatDetailSidebar({
                 >
                   <h3
                     id="cat-sidebar-tags-heading"
-                    className="text-xs font-semibold uppercase tracking-wider text-violet-700"
+                    className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle"
                   >
                     Personality
                   </h3>
@@ -111,11 +111,11 @@ export function CatDetailSidebar({
               >
                 <h3
                   id="cat-sidebar-about-heading"
-                  className="text-xs font-semibold uppercase tracking-wider text-violet-700"
+                  className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle"
                 >
                   About {cat.name}
                 </h3>
-                <p className="mt-3 whitespace-pre-line leading-relaxed text-violet-900">
+                <p className="mt-3 whitespace-pre-line leading-relaxed text-foreground-soft">
                   {cat.description}
                 </p>
               </section>
@@ -126,11 +126,11 @@ export function CatDetailSidebar({
               >
                 <h3
                   id="cat-sidebar-about-heading"
-                  className="text-xs font-semibold uppercase tracking-wider text-violet-700"
+                  className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle"
                 >
                   Popularity
                 </h3>
-                <span className="mt-3 whitespace-pre-line leading-relaxed text-violet-900 flex flex-row">
+                <span className="mt-3 whitespace-pre-line leading-relaxed text-foreground-soft flex flex-row">
                   {cat.popularity}
 
                   <svg
@@ -146,7 +146,7 @@ export function CatDetailSidebar({
 
               <Button
                 onClick={handleChat}
-                className="mt-8 w-full justify-center bg-violet-400 text-white hover:bg-violet-500"
+                className="mt-8 w-full justify-center bg-primary text-primary-foreground hover:bg-primary/80"
               >
                 Chat with {cat.name}
                 <svg

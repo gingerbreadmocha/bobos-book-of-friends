@@ -40,7 +40,7 @@ export function AuthModal({ open, onOpenChange, initialMode = "login" }: AuthMod
         </DialogDescription>
 
         {/* Left: welcome / branding panel */}
-        <aside className="hidden w-[45%] flex-col justify-between p-8 md:flex bg-violet-100">
+        <aside className="hidden w-[45%] flex-col justify-between p-8 md:flex bg-secondary">
           <div className="flex flex-1 flex-col items-center justify-center text-center">
             {/* TODO: swap for the real cat illustration asset. */}
             <img src="auth/welcomebobo.png" alt="Create cat title" />

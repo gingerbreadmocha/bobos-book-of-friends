@@ -10,11 +10,11 @@ export function CatPage() {
 
   return (
     <section className="w-full max-w-3xl text-center">
-      <h1 className="text-3xl font-semibold text-violet-950">Cat</h1>
-      <p className="mt-3 text-violet-900">
+      <h1 className="text-3xl font-semibold text-foreground">Cat</h1>
+      <p className="mt-3 text-foreground-soft">
         Chat with the cats of Bobo&apos;s book of friends.
       </p>
-      <div className="mt-8 rounded-2xl border-2 border-dashed border-violet-300 bg-white/60 p-10">
+      <div className="mt-8 rounded-2xl border-2 border-dashed border-input bg-white/60 p-10">
         {activeCat ? (
           <div className="flex flex-col items-center gap-4">
             <img
@@ -25,10 +25,10 @@ export function CatPage() {
             <p className="text-xl font-semibold text-violet-950">
               Chatting with {activeCat.name}
             </p>
-            <p className="text-violet-500">The chat room is coming soon.</p>
+            <p className="text-muted-foreground">The chat room is coming soon.</p>
           </div>
         ) : (
-          <p className="text-violet-500">The chat room is coming soon.</p>
+          <p className="text-muted-foreground">The chat room is coming soon.</p>
         )}
       </div>
     </section>

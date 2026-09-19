@@ -6,13 +6,13 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   [
     "flex items-center px-4 py-2.5 rounded-lg font-medium transition-colors duration-150 outline-none",
     isActive
-      ? "bg-violet-300 text-violet-950"
-      : "text-violet-900 hover:bg-violet-100 focus:bg-violet-300 active:bg-violet-300",
+      ? "bg-sidebar-accent text-sidebar-accent-foreground"
+      : "text-sidebar-foreground hover:bg-sidebar focus:bg-sidebar-accent active:bg-sidebar-accent",
   ].join(" ");
 
 /** Shared styling for the account button so the signed-in/out states match. */
 const accountButtonClass =
-  "mt-4 flex flex-row h-auto gap-0 border-0 rounded-md px-6 py-3 text-base font-normal whitespace-normal bg-violet-950 text-gray-200 shadow-md transition-colors duration-150 hover:bg-violet-900 focus:outline-none focus:ring-2 focus:ring-violet-400 focus-visible:ring-2 focus-visible:ring-violet-400 active:bg-violet-950 active:not-aria-[haspopup]:translate-y-0";
+  "mt-4 flex flex-row h-auto gap-0 border-0 rounded-md px-6 py-3 text-base font-normal whitespace-normal bg-sidebar-primary text-gray-200 shadow-md transition-colors duration-150 hover:bg-primary-strong-hover focus:outline-none focus:ring-2 focus:ring-sidebar-ring focus-visible:ring-2 focus-visible:ring-sidebar-ring active:bg-sidebar-primary active:not-aria-[haspopup]:translate-y-0";
 
 const accountIcon = (
   <svg
@@ -35,11 +35,11 @@ const accountIcon = (
 export function Sidebar() {
   const { user, isAuthenticated, showAuth, logout } = useUser()
   return (
-    <aside className="hidden md:flex h-full min-h-dvh w-80 shrink-0 overflow-y-auto bg-violet-100 flex-col p-8 sticky top-0">
+    <aside className="hidden md:flex h-full min-h-dvh w-80 shrink-0 overflow-y-auto bg-sidebar flex-col p-8 sticky top-0">
       <img src="sidebar/cathat_logo.png" alt="Cat chat" />
-      <span className="text-violet-900">Real cats. Real chats.</span>
+      <span className="text-sidebar-foreground">Real cats. Real chats.</span>
 
-      <nav className="space-y-2 w-full mt-8 border-b-1 border-violet-800 pb-4">
+      <nav className="space-y-2 w-full mt-8 border-b-1 border-sidebar-border pb-4">
         <NavLink to="/cat" end className={navLinkClass}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +133,7 @@ export function Sidebar() {
         />
         {isAuthenticated ? (
           <>
-            <p className="mt-4 text-center text-violet-950">
+            <p className="mt-4 text-center text-foreground">
               Signed in as{" "}
               <span className="font-semibold">{user?.username}</span>
             </p>

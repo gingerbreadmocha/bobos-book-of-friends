@@ -23,12 +23,12 @@ export function MyCatsPage() {
           alt="Create cat title"
           className="max-h-[200px]"
         />
-        <p className="mt-3 text-violet-900">
+        <p className="mt-3 text-foreground-soft">
           The cats you have adopted and can chat with.
         </p>
       </div>
 
-      <div className="mt-8 rounded-2xl border-2 border-dashed border-violet-300 bg-white/60 p-10">
+      <div className="mt-8 rounded-2xl border-2 border-dashed border-input bg-white/60 p-10">
         {loading && <p>Please wait! Your cats are on the way. </p>}
         {!loading && cats.length > 0 && (
           <ul className="grid gap-6 sm:grid-cols-2">
