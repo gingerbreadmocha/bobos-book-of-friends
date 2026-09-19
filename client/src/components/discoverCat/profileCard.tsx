@@ -64,7 +64,7 @@ export function ProfileCard({ cat, onChat, onSelect }: ProfileCardProps) {
       tabIndex={0}
       onClick={handleSelect}
       onKeyDown={handleCardKeyDown}
-      className="flex flex-col overflow-hidden rounded-2xl border-2 border-violet-200 bg-white/70 shadow-sm transition-shadow duration-150 hover:shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 max-w-[300px] min-h-[500px] justify-center items-center pt-4"
+      className="flex flex-col overflow-hidden rounded-2xl border-2 border-border bg-white/70 shadow-sm transition-shadow duration-150 hover:shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring max-w-[300px] min-h-[500px] justify-center items-center pt-4"
     >
       <img
         src={pictureSrc}
@@ -72,9 +72,9 @@ export function ProfileCard({ cat, onChat, onSelect }: ProfileCardProps) {
         className="h-48 w-48 rounded-full shrink-0 object-cover"
       />
       <div className="flex flex-1 flex-col p-4">
-        <h2 className="text-xl font-semibold text-violet-950">{cat.name}</h2>
+        <h2 className="text-xl font-semibold text-foreground">{cat.name}</h2>
         {cat.owner && (
-          <p className="mt-1 text-sm text-violet-700">
+          <p className="mt-1 text-sm text-foreground-subtle">
             by {cat.owner.username}
           </p>
         )}
@@ -99,7 +99,7 @@ export function ProfileCard({ cat, onChat, onSelect }: ProfileCardProps) {
         <div className="justify-start">{truncatedDescription}</div>
         <Button
           onClick={handleChat}
-          className="mt-auto w-full justify-center bg-violet-400 text-white hover:bg-violet-500"
+          className="mt-auto w-full justify-center bg-primary text-primary-foreground hover:bg-primary/80"
         >
           Chat with {cat.name}
           <svg

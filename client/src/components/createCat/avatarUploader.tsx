@@ -129,12 +129,12 @@ export function AvatarUploader({ setImageUrl }: AvatarUploaderProps) {
           onClick={() => fileInputRef.current?.click()}
           disabled={uploading}
           aria-disabled={uploading}
-          className="group relative flex h-40 w-40 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-violet-300 bg-white/60 text-violet-400 transition-colors duration-150 hover:border-violet-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 active:bg-violet-50 disabled:cursor-not-allowed"
+          className="group relative flex h-40 w-40 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-input bg-white/60 text-muted-foreground transition-colors duration-150 hover:border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-ring active:bg-muted disabled:cursor-not-allowed"
         >
           {uploading ? (
             <span className="flex flex-col items-center gap-1">
               <span
-                className="size-6 animate-spin rounded-full border-2 border-violet-400 border-t-transparent"
+                className="size-6 animate-spin rounded-full border-2 border-primary border-t-transparent"
                 aria-hidden="true"
               />
               <span className="text-sm font-medium">Uploading…</span>
@@ -146,7 +146,7 @@ export function AvatarUploader({ setImageUrl }: AvatarUploaderProps) {
                 alt="Your cat photo preview"
                 className="h-full w-full object-cover"
               />
-              <span className="absolute inset-0 flex flex-col items-center justify-center gap-1 bg-violet-950/50 text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+              <span className="absolute inset-0 flex flex-col items-center justify-center gap-1 bg-overlay/50 text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">
                 <CameraIcon />
                 <span className="text-sm font-medium">Change photo</span>
               </span>
@@ -162,7 +162,7 @@ export function AvatarUploader({ setImageUrl }: AvatarUploaderProps) {
           <button
             type="button"
             onClick={clearPhoto}
-            className="text-sm font-medium text-violet-500 underline-offset-4 transition-colors duration-150 hover:text-violet-700 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
+            className="text-sm font-medium text-muted-foreground underline-offset-4 transition-colors duration-150 hover:text-foreground-subtle hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             Remove photo
           </button>
@@ -180,7 +180,7 @@ export function AvatarUploader({ setImageUrl }: AvatarUploaderProps) {
                 type="button"
                 onClick={() => selectAvatar(avatar.src)}
                 aria-pressed={isSelected}
-                className="rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2"
+                className="rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               >
                 <img
                   src={avatar.src}
@@ -188,7 +188,7 @@ export function AvatarUploader({ setImageUrl }: AvatarUploaderProps) {
                   className={[
                     "h-20 w-20 rounded-full object-cover transition-all duration-150",
                     isSelected
-                      ? "ring-2 ring-violet-500 ring-offset-2"
+                      ? "ring-2 ring-primary ring-offset-2"
                       : "opacity-80 hover:opacity-100",
                   ].join(" ")}
                 />

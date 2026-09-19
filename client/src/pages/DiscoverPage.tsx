@@ -9,12 +9,12 @@ export function DiscoverPage() {
           alt="Cat chat"
           className="max-h-[200px]"
         />
-        <p className="mt-3 text-violet-900">
+        <p className="mt-3 text-foreground-soft">
           Meet new feline friends! Chat with different cats, explore their
           unique personalities, and find your favorites.
         </p>
       </div>
-      <div className="mt-8 rounded-2xl border-2 border-dashed border-violet-300 bg-white/60 p-10">
+      <div className="mt-8 rounded-2xl border-2 border-dashed border-input bg-white/60 p-10">
         <CatList />
       </div>
     </section>

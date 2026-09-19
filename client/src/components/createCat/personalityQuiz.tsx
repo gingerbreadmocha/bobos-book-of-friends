@@ -140,7 +140,7 @@ export function PersonalityQuiz({ answers, onChange }: PersonalityQuizProps) {
 
   return (
     <div className="mt-4 space-y-8">
-      <p className="text-violet-900">
+      <p className="text-foreground-soft">
         Pick the answer that fits your cat best &mdash; there are no wrong
         answers!
       </p>
@@ -151,7 +151,7 @@ export function PersonalityQuiz({ answers, onChange }: PersonalityQuizProps) {
         >
           <h3
             id={`quiz-${section.id}-heading`}
-            className="text-lg font-semibold text-violet-950"
+            className="text-lg font-semibold text-foreground"
           >
             {section.title}
           </h3>
@@ -159,7 +159,7 @@ export function PersonalityQuiz({ answers, onChange }: PersonalityQuizProps) {
           <div className="mt-3 space-y-6">
             {section.questions.map((question) => (
               <fieldset key={question.id}>
-                <legend className="font-medium text-violet-900">
+                <legend className="font-medium text-foreground-soft">
                   {question.prompt}
                 </legend>
                 <RadioGroup
@@ -176,8 +176,8 @@ export function PersonalityQuiz({ answers, onChange }: PersonalityQuizProps) {
                         className={cn(
                           "flex cursor-pointer items-center gap-3 rounded-xl border-2 px-4 py-3 text-sm font-medium transition-colors duration-150",
                           isSelected
-                            ? "border-violet-600 bg-violet-100 text-violet-950"
-                            : "border-violet-300 bg-white/70 text-violet-900 hover:border-violet-400 hover:bg-violet-50",
+                            ? "border-primary bg-secondary text-foreground"
+                            : "border-input bg-white/70 text-foreground-soft hover:border-ring hover:bg-muted",
                         )}
                       >
                         <RadioGroupItem value={option} className="sr-only!" />

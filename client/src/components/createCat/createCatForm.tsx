@@ -35,12 +35,12 @@ export function CreateCatForm() {
       <section aria-labelledby="cat-name-heading">
         <h2
           id="cat-name-heading"
-          className="text-2xl font-semibold text-violet-950"
+          className="text-2xl font-semibold text-foreground"
         >
           Name
         </h2>
         <label htmlFor="cat-name">
-          <span className="mt-1 block text-violet-900">
+          <span className="mt-1 block text-foreground-soft">
             What&apos;s your cat&apos;s name?
           </span>
           <input
@@ -49,7 +49,7 @@ export function CreateCatForm() {
             value={name}
             onChange={(event) => setName(event.target.value)}
             placeholder="e.g. Bobo"
-            className="mt-3 w-full rounded-xl border-2 border-violet-300 bg-white/70 px-4 py-3 text-violet-950 placeholder-violet-300 outline-none transition-colors duration-150 focus:border-violet-500 focus:ring-2 focus:ring-violet-300"
+            className="mt-3 w-full rounded-xl border-2 border-input bg-white/70 px-4 py-3 text-foreground placeholder:text-muted-foreground outline-none transition-colors duration-150 focus:border-primary focus:ring-2 focus:ring-ring"
           />
         </label>
       </section>
@@ -58,11 +58,11 @@ export function CreateCatForm() {
       <section aria-labelledby="cat-avatar-heading">
         <h2
           id="cat-avatar-heading"
-          className="text-2xl font-semibold text-violet-950"
+          className="text-2xl font-semibold text-foreground"
         >
           Avatar
         </h2>
-        <p className="mt-1 text-violet-900">
+        <p className="mt-1 text-foreground-soft">
           Upload a cute photo of your cat (or choose from our avatars).
         </p>
         <AvatarUploader setImageUrl={setImageUrl} />
@@ -72,12 +72,12 @@ export function CreateCatForm() {
       <section aria-labelledby="cat-description-heading">
         <h2
           id="cat-description-heading"
-          className="text-2xl font-semibold text-violet-950"
+          className="text-2xl font-semibold text-foreground"
         >
           Description
         </h2>
         <label htmlFor="cat-description">
-          <span className="mt-1 block text-violet-900">
+          <span className="mt-1 block text-foreground-soft">
             Tell us a bit about your cat.
           </span>
           <textarea
@@ -86,7 +86,7 @@ export function CreateCatForm() {
             onChange={(event) => setDescription(event.target.value)}
             placeholder="e.g. Bobo is a fancy Tuxie that likes to scooty poopy on the carpet randomly to troll his butlers..."
             rows={5}
-            className="mt-3 w-full resize-none rounded-xl border-2 border-violet-300 bg-white/70 px-4 py-3 text-violet-950 placeholder-violet-300 outline-none transition-colors duration-150 focus:border-violet-500 focus:ring-2 focus:ring-violet-300"
+            className="mt-3 w-full resize-none rounded-xl border-2 border-input bg-white/70 px-4 py-3 text-foreground placeholder:text-muted-foreground outline-none transition-colors duration-150 focus:border-primary focus:ring-2 focus:ring-ring"
           />
         </label>
       </section>
@@ -95,7 +95,7 @@ export function CreateCatForm() {
       <section aria-labelledby="cat-quiz-heading">
         <h2
           id="cat-quiz-heading"
-          className="text-2xl font-semibold text-violet-950"
+          className="text-2xl font-semibold text-foreground"
         >
           Personality quiz
         </h2>
@@ -105,7 +105,7 @@ export function CreateCatForm() {
       <div>
         <button
           type="submit"
-          className="rounded-xl bg-violet-950 px-8 py-3 font-medium text-white shadow-md transition-colors duration-150 hover:bg-violet-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 active:bg-violet-950 w-full"
+          className="rounded-xl bg-primary-strong px-8 py-3 font-medium text-primary-foreground shadow-md transition-colors duration-150 hover:bg-primary-strong-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-ring active:bg-primary-strong w-full"
         >
           Create cat
         </button>

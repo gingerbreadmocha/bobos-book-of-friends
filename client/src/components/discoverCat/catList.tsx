@@ -56,12 +56,12 @@ export const CatList = () => {
       <div ref={sentinelRef} aria-hidden="true" className="h-px" />
 
       {loading && (
-        <p className="mt-8 text-violet-700" role="status">
+        <p className="mt-8 text-foreground-subtle" role="status">
           {cats.length === 0 ? "Loading cats..." : "Loading more cats..."}
         </p>
       )}
       {!loading && !hasMore && cats.length > 0 && (
-        <p className="mt-8 text-violet-500">
+        <p className="mt-8 text-muted-foreground">
           You&apos;ve reached the end of the cat library!
         </p>
       )}
