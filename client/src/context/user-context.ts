@@ -1,4 +1,9 @@
 import { createContext, useContext } from "react";
+import type {
+  LoginCredentials,
+  PublicUser,
+  SignUpCredentials,
+} from "@/types/user";
 
 /**
  * This module must stay free of component exports.
@@ -15,29 +20,6 @@ import { createContext, useContext } from "react";
  * Keeping the context object here — and `UserProvider` in its own file — means
  * editing the provider (or any consumer) never recreates this object.
  */
-
-/**
- * The shape of the user the server returns (see the server's `toPublicUser`).
- * `createdAt` arrives as an ISO string after the JSON round-trip.
- */
-export type PublicUser = {
-  id: string;
-  username: string;
-  email: string;
-  createdAt: string;
-};
-
-/** Credentials accepted by POST /api/login. */
-export type LoginCredentials =
-  | { email: string; password: string }
-  | { username: string; password: string };
-
-/** Credentials accepted by POST /api/create-account. */
-export type SignUpCredentials = {
-  username: string;
-  email: string;
-  password: string;
-};
 
 export type UserContextValue = {
   /** The signed-in user, or null when signed out. */

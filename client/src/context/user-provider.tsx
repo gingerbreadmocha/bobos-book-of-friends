@@ -7,11 +7,13 @@ import {
 import {AuthModal} from "@/components/auth/auth-modal.tsx";
 import {
   UserContext,
-  type LoginCredentials,
-  type PublicUser,
-  type SignUpCredentials,
   type UserContextValue,
 } from "@/context/user-context";
+import type {
+  LoginCredentials,
+  PublicUser,
+  SignUpCredentials,
+} from "@/types/user";
 
 /**
  * The server responds to login/signup with a signed JWT plus the public user.

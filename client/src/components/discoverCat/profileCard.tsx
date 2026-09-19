@@ -1,6 +1,6 @@
 import { useMemo, type KeyboardEvent, type MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import type { Cat } from "@/hooks/useGetCats";
+import type { Cat } from "@/types/cat";
 import { useCat } from "@/context/cat-context";
 import { Button } from "@/components/ui/button";
 import { getRandomAvatar } from "@/utils/getRandomAvatar";

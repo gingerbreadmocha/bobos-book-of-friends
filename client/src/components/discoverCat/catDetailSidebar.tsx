@@ -1,6 +1,6 @@
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { useNavigate } from "react-router-dom";
-import type { Cat } from "@/hooks/useGetCats";
+import type { Cat } from "@/types/cat";
 import { useCat } from "@/context/cat-context";
 import { Button } from "@/components/ui/button";
 import { getRandomAvatar } from "@/utils/getRandomAvatar";

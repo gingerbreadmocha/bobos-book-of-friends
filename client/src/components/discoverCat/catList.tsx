@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { useGetCats, type Cat } from "@/hooks/useGetCats";
+import { useGetCats } from "@/hooks/useGetCats";
+import type { Cat } from "@/types/cat";
 import { ProfileCard } from "@/components/discoverCat/profileCard";
 import { CatDetailSidebar } from "@/components/discoverCat/catDetailSidebar";
 

@@ -1,12 +1,5 @@
 import { useCallback } from "react";
-
-/** Authentication parameters returned by `/api/imagekit/auth` for direct uploads. */
-export type ImageKitAuthResponse = {
-  token: string;
-  expire: number;
-  signature: string;
-  publicKey: string;
-};
+import type { ImageKitAuthResponse } from "@/types/imagekit";
 
 export function useImageKitAuth() {
   return useCallback(async (): Promise<ImageKitAuthResponse> => {
