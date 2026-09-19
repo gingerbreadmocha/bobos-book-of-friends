@@ -22,7 +22,7 @@ export function CatPage() {
               alt={`${activeCat.name} avatar`}
               className="h-24 w-24 rounded-full object-cover"
             />
-            <p className="text-xl font-semibold text-violet-950">
+            <p className="text-xl font-semibold text-foreground">
               Chatting with {activeCat.name}
             </p>
             <p className="text-muted-foreground">The chat room is coming soon.</p>
