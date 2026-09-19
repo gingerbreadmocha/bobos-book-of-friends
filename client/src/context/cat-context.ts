@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import type { Cat } from "@/hooks/useGetCats";
+import type { Cat } from "@/types/cat";
 
 export type CatContextValue = {
   /** The cat the user is currently chatting with, or null when none selected. */

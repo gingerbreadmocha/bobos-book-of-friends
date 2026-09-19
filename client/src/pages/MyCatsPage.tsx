@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMyGetCats } from "@/hooks/useMyGetCats";
-import type { Cat } from "@/hooks/useGetCats";
+import type { Cat } from "@/types/cat";
 import { ProfileCard } from "@/components/discoverCat/profileCard";
 import { CatDetailSidebar } from "@/components/discoverCat/catDetailSidebar";
 

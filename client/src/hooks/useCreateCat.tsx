@@ -1,13 +1,6 @@
 import { useCallback, useState } from "react";
-import type { Cat } from "./useGetCats";
 import { useUser } from "@/context/user-context";
-
-export type CreateCatInput = {
-  name: string;
-  avatarUrl: string | null;
-  description: string;
-  personality: Record<string, unknown>;
-};
+import type { Cat, CreateCatInput } from "@/types/cat";
 
 export function useCreateCat() {
   const [isSubmitting, setIsSubmitting] = useState(false);

@@ -1,10 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import type { Cat } from "./useGetCats";
 import { useUser } from "@/context/user-context";
-
-export type MyCatsResponse = {
-  cats: Cat[];
-};
+import type { Cat, MyCatsResponse } from "@/types/cat";
 
 export function useMyGetCats() {
   const [loading, setLoading] = useState(true);

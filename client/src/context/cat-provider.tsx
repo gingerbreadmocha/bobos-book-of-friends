@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState, type ReactNode } from "react";
-import type { Cat } from "@/hooks/useGetCats";
+import type { Cat } from "@/types/cat";
 import { CatContext, type CatContextValue } from "@/context/cat-context";
 
 export function CatProvider({ children }: { children: ReactNode }) {
