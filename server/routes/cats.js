@@ -42,6 +42,24 @@ router.get("/cats", async (req, res) => {
 });
 
 /**
+ * GET /api/cats/:id
+ * Returns a single cat (with its owner) so pages reached by direct URL
+ * (e.g. /cat/:id) can load the cat without walking the paginated list.
+ */
+router.get("/cats/:id", async (req, res) => {
+    const cat = await prisma.cat.findUnique({
+        where: { id: req.params.id },
+        include: { owner: { select: { id: true, username: true } } },
+    });
+
+    if (!cat) {
+        return res.status(404).json({ error: "Cat not found." });
+    }
+
+    res.json(cat);
+});
+
+/**
  * GET /api/my-cats
  * Returns the cats owned by the signed-in user (newest first).
  */

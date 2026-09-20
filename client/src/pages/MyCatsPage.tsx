@@ -19,7 +19,7 @@ export function MyCatsPage() {
     <section className="w-full text-center">
       <div className="flex flex-col justify-center items-center">
         <img
-          src="myCats/my_cats.png"
+          src="/myCats/my_cats.png"
           alt="Create cat title"
           className="max-h-[200px]"
         />

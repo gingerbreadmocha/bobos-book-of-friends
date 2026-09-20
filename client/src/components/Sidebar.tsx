@@ -25,9 +25,9 @@ const accountIcon = (
     viewBox="0 0 24 24"
   >
     <path
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
-      clip-rule="evenodd"
+      clipRule="evenodd"
     />
   </svg>
 );
@@ -36,7 +36,7 @@ export function Sidebar() {
   const { user, isAuthenticated, showAuth, logout } = useUser()
   return (
     <aside className="hidden md:flex h-full min-h-dvh w-80 shrink-0 overflow-y-auto bg-sidebar flex-col p-8 sticky top-0">
-      <img src="sidebar/cathat_logo.png" alt="Cat chat" />
+      <img src="/sidebar/cathat_logo.png" alt="Cat chat" />
       <span className="text-sidebar-foreground">Real cats. Real chats.</span>
 
       <nav className="space-y-2 w-full mt-8 border-b-1 border-sidebar-border pb-4">
@@ -45,13 +45,13 @@ export function Sidebar() {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             className="size-6 mr-4"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
             />
           </svg>
@@ -63,13 +63,13 @@ export function Sidebar() {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             className="size-6 mr-4"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
             />
           </svg>
@@ -104,9 +104,9 @@ export function Sidebar() {
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
             />
           </svg>
@@ -115,19 +115,19 @@ export function Sidebar() {
       </nav>
 
       <img
-        src="sidebar/sleeping_cat.png"
+        src="/sidebar/sleeping_cat.png"
         alt="Sleeping cat"
         className="h-30 w-auto mx-auto mt-16"
       />
       <img
-        src="sidebar/chat_with_your_favorite_cats.png"
+        src="/sidebar/chat_with_your_favorite_cats.png"
         alt="Chat with cat"
         className="w-40 h-auto mx-auto"
       />
 
       <div className="flex flex-col items-center mt-6 mt-auto">
         <img
-          src="sidebar/shelf.png"
+          src="/sidebar/shelf.png"
           alt="Shelf"
           className="w-56 h-auto -mb-8"
         />
