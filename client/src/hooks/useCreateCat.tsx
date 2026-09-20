@@ -43,7 +43,7 @@ export function useCreateCat() {
     } finally {
       setIsSubmitting(false);
     }
-  }, []);
+  }, [token, user]);
 
   return { createCat, isSubmitting, error };
 }

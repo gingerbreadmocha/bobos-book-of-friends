@@ -2,7 +2,7 @@ export function CreateCatTitle() {
   return (
     <div className="flex flex-col justify-center items-center">
       <img
-        src="createCat/create_cat.png"
+        src="/createCat/create_cat.png"
         alt="Create cat title"
         className="max-h-[250px]"
       />

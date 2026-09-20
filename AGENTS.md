@@ -60,3 +60,5 @@ Follow the conventions already in the codebase rather than introducing new patte
 - Client dev: `npm run dev` (in `client/`)
 - Client build: `npm run build` (in `client/`)
 - Client lint: `npm run lint` (in `client/`)
+
+Do not run server or frontend to test, server is usually running already during dev

@@ -43,7 +43,7 @@ export function AuthModal({ open, onOpenChange, initialMode = "login" }: AuthMod
         <aside className="hidden w-[45%] flex-col justify-between p-8 md:flex bg-secondary">
           <div className="flex flex-1 flex-col items-center justify-center text-center">
             {/* TODO: swap for the real cat illustration asset. */}
-            <img src="auth/welcomebobo.png" alt="Create cat title" />
+            <img src="/auth/welcomebobo.png" alt="Create cat title" />
 
             <h2 className="font-heading text-2xl font-semibold text-foreground">
               Welcome to CatChat!

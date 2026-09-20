@@ -11,7 +11,6 @@ import { DiscoverPage } from "./pages/DiscoverPage";
 import { MyCatsPage } from "./pages/MyCatsPage";
 import { CreateCatPage } from "./pages/CreateCatPage";
 import { UserProvider } from "./context/user-provider";
-import { CatProvider } from "./context/cat-provider";
 
 function Layout() {
   return (
@@ -33,17 +32,16 @@ function App() {
   return (
     <BrowserRouter>
       <UserProvider>
-      <CatProvider>
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Navigate to="/cat" replace />} />
           <Route path="/cat" element={<CatPage />} />
+          <Route path="/cat/:catId" element={<CatPage />} />
           <Route path="/discover" element={<DiscoverPage />} />
           <Route path="/mycats" element={<MyCatsPage />} />
           <Route path="/create-cat" element={<CreateCatPage />} />
         </Route>
       </Routes>
-      </CatProvider>
       </UserProvider>
     </BrowserRouter>
   );
