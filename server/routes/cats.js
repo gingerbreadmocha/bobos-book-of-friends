@@ -42,6 +42,48 @@ router.get("/cats", async (req, res) => {
 });
 
 /**
+ * GET /api/cats/chatted
+ * Returns the cats the signed-in user has chatted with, along with the most
+ * recent message in each conversation (newest conversation first).
+ */
+router.get("/cats/chatted", async (req, res) => {
+    const userId = getAuthenticatedUserId(req);
+    if (!userId) {
+        return res.status(401).json({ error: "Sign in to view your chats." });
+    }
+
+    const cats = await prisma.cat.findMany({
+        where: { messages: { some: { userId } } },
+        include: {
+            owner: { select: { id: true, username: true } },
+            messages: {
+                where: { userId },
+                orderBy: { createdAt: "desc" },
+                take: 1,
+                select: { id: true, role: true, content: true, createdAt: true },
+            },
+        },
+    });
+
+    res.json({
+        cats: cats
+            .map(({ messages, ...cat }) => ({
+                ...cat,
+                lastMessage: {
+                    id: messages[0].id,
+                    role: messages[0].role === "assistant" ? "cat" : "user",
+                    text: messages[0].content,
+                    createdAt: messages[0].createdAt,
+                },
+            }))
+            .sort(
+                (a, b) =>
+                    b.lastMessage.createdAt.getTime() - a.lastMessage.createdAt.getTime(),
+            ),
+    });
+});
+
+/**
  * GET /api/cats/:id
  * Returns a single cat (with its owner) so pages reached by direct URL
  * (e.g. /cat/:id) can load the cat without walking the paginated list.
