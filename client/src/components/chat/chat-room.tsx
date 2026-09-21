@@ -5,7 +5,7 @@ import { useChat } from "@/hooks/useChat";
 import type { Cat } from "@/hooks/useGetCats";
 
 export function ChatRoom({ cat }: { cat: Cat }) {
-  const { messages, sendMessage, sending, error } = useChat(cat.id);
+  const { messages, sendMessage, sending, error } = useChat(cat.id, cat.name);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
