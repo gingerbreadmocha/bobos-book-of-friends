@@ -33,7 +33,7 @@ const accountIcon = (
 );
 
 export function Sidebar() {
-  const { user, isAuthenticated, showAuth, logout } = useUser()
+  const { user, isAuthenticated, showAuth, logout } = useUser();
   return (
     <aside className="hidden md:flex h-full min-h-dvh w-80 shrink-0 overflow-y-auto bg-sidebar flex-col p-8 sticky top-0">
       <img src="/sidebar/cathat_logo.png" alt="Cat chat" />
@@ -126,16 +126,11 @@ export function Sidebar() {
       />
 
       <div className="flex flex-col items-center mt-6 mt-auto">
-        <img
-          src="/sidebar/shelf.png"
-          alt="Shelf"
-          className="w-56 h-auto -mb-8"
-        />
+        <img src="/sidebar/shelf.png" alt="Shelf" className="w-56 h-auto -mb-8" />
         {isAuthenticated ? (
           <>
             <p className="mt-4 text-center text-foreground">
-              Signed in as{" "}
-              <span className="font-semibold">{user?.username}</span>
+              Signed in as <span className="font-semibold">{user?.username}</span>
             </p>
             <Button className={accountButtonClass} onClick={logout}>
               {accountIcon}

@@ -19,9 +19,7 @@ export function ChatRoom({ cat }: { cat: Cat }) {
         <div ref={bottomRef} />
       </div>
       {sending && (
-        <p className="shrink-0 text-sm text-muted-foreground">
-          {cat.name} is thinking...
-        </p>
+        <p className="shrink-0 text-sm text-muted-foreground">{cat.name} is thinking...</p>
       )}
       {error && <p className="shrink-0 text-sm text-destructive">{error}</p>}
       <div className="shrink-0">

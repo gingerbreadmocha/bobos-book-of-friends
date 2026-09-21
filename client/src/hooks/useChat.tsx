@@ -34,9 +34,7 @@ export function useChat(catId: string) {
         const data = (await response.json()) as HistoryResponse;
         if (!cancelled) setMessages(data.messages);
       } catch (err) {
-        console.error(
-          err instanceof Error ? err.message : "Failed to load chat history.",
-        );
+        console.error(err instanceof Error ? err.message : "Failed to load chat history.");
       }
     };
 
@@ -50,10 +48,7 @@ export function useChat(catId: string) {
   const sendMessage = useCallback(
     async (message: string) => {
       setError(null);
-      setMessages((prev) => [
-        ...prev,
-        { id: createMessageId(), role: "user", text: message },
-      ]);
+      setMessages((prev) => [...prev, { id: createMessageId(), role: "user", text: message }]);
       setSending(true);
 
       try {
@@ -62,36 +57,32 @@ export function useChat(catId: string) {
           return;
         }
 
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ catId, message }),
-      });
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ catId, message }),
+        });
 
-      if (!response.ok) {
-        console.error("Failed to get a reply from the cat.");
+        if (!response.ok) {
+          console.error("Failed to get a reply from the cat.");
+          setError("The cat didn't answer. Please try again.");
+          return;
+        }
+
+        const data = (await response.json()) as ChatResponse;
+        setMessages((prev) => [...prev, { id: createMessageId(), role: "cat", text: data.reply }]);
+      } catch (err) {
+        console.error(err instanceof Error ? err.message : "Failed to get a reply from the cat.");
         setError("The cat didn't answer. Please try again.");
-        return;
+      } finally {
+        setSending(false);
       }
-
-      const data = (await response.json()) as ChatResponse;
-      setMessages((prev) => [
-        ...prev,
-        { id: createMessageId(), role: "cat", text: data.reply },
-      ]);
-    } catch (err) {
-      console.error(
-        err instanceof Error ? err.message : "Failed to get a reply from the cat.",
-      );
-      setError("The cat didn't answer. Please try again.");
-    } finally {
-      setSending(false);
-    }
-  },
-  [catId, token]);
+    },
+    [catId, token],
+  );
 
   return { messages, sendMessage, sending, error };
 }

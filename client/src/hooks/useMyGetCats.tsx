@@ -34,9 +34,7 @@ export function useMyGetCats() {
       const data = (await response.json()) as MyCatsResponse;
       setCats(data.cats);
     } catch (err) {
-      console.error(
-        err instanceof Error ? err.message : "Failed to load your cats.",
-      );
+      console.error(err instanceof Error ? err.message : "Failed to load your cats.");
     } finally {
       setLoading(false);
     }

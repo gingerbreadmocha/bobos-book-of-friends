@@ -14,36 +14,39 @@ export function useCreateCat() {
   const [error, setError] = useState<string | null>(null);
   const { token, user } = useUser();
 
-  const createCat = useCallback(async (newCat: CreateCatInput) => {
-    setIsSubmitting(true);
-    setError(null);
+  const createCat = useCallback(
+    async (newCat: CreateCatInput) => {
+      setIsSubmitting(true);
+      setError(null);
 
-    if (!user) {
-      setError("User must be logged in to create a cat.");
-      return;
-    }
-
-    const body = {
-      ...newCat,
-    };
-    try {
-      const response = await fetch("/api/cats", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(body),
-      });
-      if (!response.ok) {
-        const body = await response.json().catch(() => null);
-        throw new Error(body?.error ?? "Failed to create cat.");
+      if (!user) {
+        setError("User must be logged in to create a cat.");
+        return;
       }
-      return (await response.json()) as Cat;
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [token, user]);
+
+      const body = {
+        ...newCat,
+      };
+      try {
+        const response = await fetch("/api/cats", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(body),
+        });
+        if (!response.ok) {
+          const body = await response.json().catch(() => null);
+          throw new Error(body?.error ?? "Failed to create cat.");
+        }
+        return (await response.json()) as Cat;
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [token, user],
+  );
 
   return { createCat, isSubmitting, error };
 }

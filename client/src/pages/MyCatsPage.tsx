@@ -18,14 +18,8 @@ export function MyCatsPage() {
   return (
     <section className="w-full text-center">
       <div className="flex flex-col justify-center items-center">
-        <img
-          src="/myCats/my_cats.png"
-          alt="Create cat title"
-          className="max-h-[200px]"
-        />
-        <p className="mt-3 text-foreground-soft">
-          The cats you have adopted and can chat with.
-        </p>
+        <img src="/myCats/my_cats.png" alt="Create cat title" className="max-h-[200px]" />
+        <p className="mt-3 text-foreground-soft">The cats you have adopted and can chat with.</p>
       </div>
 
       <div className="mt-8 rounded-2xl border-2 border-dashed border-input bg-white/60 p-10">
@@ -39,9 +33,7 @@ export function MyCatsPage() {
             ))}
           </ul>
         )}
-        {!loading && cats.length === 0 && (
-          <p>You haven&apos;t adopted any cats yet.</p>
-        )}
+        {!loading && cats.length === 0 && <p>You haven&apos;t adopted any cats yet.</p>}
       </div>
 
       <CatDetailSidebar

@@ -1,6 +1,6 @@
-import 'dotenv/config';
+import "dotenv/config";
 import express from "express";
-import cors from "cors"
+import cors from "cors";
 import authRouter from "./routes/auth.js";
 import imageUploadRouter from "./routes/imageUpload.js";
 import catsRouter from "./routes/cats.js";
@@ -14,13 +14,13 @@ const allowedOrigins = (process.env.CORS_ORIGIN ?? "*")
     .map((origin) => origin.trim())
     .filter(Boolean);
 
-app.use(cors({
-    origin: allowedOrigins.length === 1 && allowedOrigins[0] === "*"
-        ? "*"
-        : allowedOrigins,
-    methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-}));
+app.use(
+    cors({
+        origin: allowedOrigins.length === 1 && allowedOrigins[0] === "*" ? "*" : allowedOrigins,
+        methods: ["GET", "POST", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+    }),
+);
 
 app.use(express.json());
 
@@ -38,11 +38,11 @@ app.use("/api", (req, res) => {
 });
 
 // Central error handler: Express forwards thrown/rejected errors here.
-app.use((err, req, res, next) => {
+app.use((err, req, res, _next) => {
     console.error(err);
     res.status(500).json({ error: "Something went wrong." });
 });
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
-})
+});

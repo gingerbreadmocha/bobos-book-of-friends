@@ -104,7 +104,7 @@ router.post("/cats", async (req, res) => {
 
         res.status(201).json(cat);
     } catch (err) {
-        console.log('err ', err);
+        console.log("err ", err);
         return res.status(500).json({ error: "Failed to create cat." });
     }
 });

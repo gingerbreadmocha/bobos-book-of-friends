@@ -1,10 +1,5 @@
-import {
-  useCallback,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
-import {AuthModal} from "@/components/auth/auth-modal.tsx";
+import { useCallback, useMemo, useState, type ReactNode } from "react";
+import { AuthModal } from "@/components/auth/auth-modal.tsx";
 import {
   UserContext,
   type LoginCredentials,
@@ -43,13 +38,9 @@ async function postJson(path: string, body: unknown): Promise<unknown> {
 
   if (!response.ok) {
     const serverError =
-      typeof data === "object" && data !== null
-        ? (data as Record<string, unknown>).error
-        : null;
+      typeof data === "object" && data !== null ? (data as Record<string, unknown>).error : null;
     throw new Error(
-      typeof serverError === "string"
-        ? serverError
-        : "Something went wrong. Please try again.",
+      typeof serverError === "string" ? serverError : "Something went wrong. Please try again.",
     );
   }
 
@@ -60,9 +51,7 @@ function isAuthResponse(value: unknown): value is AuthResponse {
   if (typeof value !== "object" || value === null) return false;
   const record = value as Record<string, unknown>;
   return (
-    typeof record.token === "string" &&
-    typeof record.user === "object" &&
-    record.user !== null
+    typeof record.token === "string" && typeof record.user === "object" && record.user !== null
   );
 }
 
@@ -121,11 +110,11 @@ function restoreSession(): SessionState {
 export function UserProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<SessionState>(restoreSession);
 
-  const [showAuthModal, setShowAuthModal] = useState(false)
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const showAuth = useCallback(() => {
-    setShowAuthModal(true)
-  }, [])
+    setShowAuthModal(true);
+  }, []);
 
   const login = useCallback(async (credentials: LoginCredentials) => {
     const data = await postJson("/api/login", credentials);
@@ -162,12 +151,15 @@ export function UserProvider({ children }: { children: ReactNode }) {
       login,
       signup,
       logout,
-      showAuth
+      showAuth,
     }),
     [session, login, signup, logout, showAuth],
   );
 
-  return <UserContext.Provider value={value}>{children}
-    <AuthModal open={showAuthModal} onOpenChange={setShowAuthModal}/>
-  </UserContext.Provider>;
+  return (
+    <UserContext.Provider value={value}>
+      {children}
+      <AuthModal open={showAuthModal} onOpenChange={setShowAuthModal} />
+    </UserContext.Provider>
+  );
 }

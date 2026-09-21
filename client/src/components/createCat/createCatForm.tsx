@@ -5,9 +5,7 @@ import { useCreateCat } from "@/hooks/useCreateCat";
 
 export function CreateCatForm() {
   const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState<string | null>(
-    "createCat/avatars/tuxedo_avatar.png",
-  );
+  const [imageUrl, setImageUrl] = useState<string | null>("createCat/avatars/tuxedo_avatar.png");
   const [description, setDescription] = useState("");
   const [quizAnswers, setQuizAnswers] = useState<PersonalityAnswers>({});
   const { error, createCat } = useCreateCat();
@@ -33,16 +31,11 @@ export function CreateCatForm() {
     <form onSubmit={handleSubmit} className="space-y-10 w-full p-8">
       {/* 1. Name */}
       <section aria-labelledby="cat-name-heading">
-        <h2
-          id="cat-name-heading"
-          className="text-2xl font-semibold text-foreground"
-        >
+        <h2 id="cat-name-heading" className="text-2xl font-semibold text-foreground">
           Name
         </h2>
         <label htmlFor="cat-name">
-          <span className="mt-1 block text-foreground-soft">
-            What&apos;s your cat&apos;s name?
-          </span>
+          <span className="mt-1 block text-foreground-soft">What&apos;s your cat&apos;s name?</span>
           <input
             id="cat-name"
             type="text"
@@ -56,10 +49,7 @@ export function CreateCatForm() {
 
       {/* 2. Avatar */}
       <section aria-labelledby="cat-avatar-heading">
-        <h2
-          id="cat-avatar-heading"
-          className="text-2xl font-semibold text-foreground"
-        >
+        <h2 id="cat-avatar-heading" className="text-2xl font-semibold text-foreground">
           Avatar
         </h2>
         <p className="mt-1 text-foreground-soft">
@@ -70,16 +60,11 @@ export function CreateCatForm() {
 
       {/* 3. Description */}
       <section aria-labelledby="cat-description-heading">
-        <h2
-          id="cat-description-heading"
-          className="text-2xl font-semibold text-foreground"
-        >
+        <h2 id="cat-description-heading" className="text-2xl font-semibold text-foreground">
           Description
         </h2>
         <label htmlFor="cat-description">
-          <span className="mt-1 block text-foreground-soft">
-            Tell us a bit about your cat.
-          </span>
+          <span className="mt-1 block text-foreground-soft">Tell us a bit about your cat.</span>
           <textarea
             id="cat-description"
             value={description}
@@ -93,10 +78,7 @@ export function CreateCatForm() {
 
       {/* 4. Personality quiz */}
       <section aria-labelledby="cat-quiz-heading">
-        <h2
-          id="cat-quiz-heading"
-          className="text-2xl font-semibold text-foreground"
-        >
+        <h2 id="cat-quiz-heading" className="text-2xl font-semibold text-foreground">
           Personality quiz
         </h2>
         <PersonalityQuiz answers={quizAnswers} onChange={setQuizAnswers} />
