@@ -115,13 +115,7 @@ export function AvatarUploader({ setImageUrl }: AvatarUploaderProps) {
 
   return (
     <div className="mt-4 flex flex-col gap-6 sm:flex-row">
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept="image/*"
-        hidden
-        onChange={handleFileChange}
-      />
+      <input ref={fileInputRef} type="file" accept="image/*" hidden onChange={handleFileChange} />
 
       <div className="flex flex-col items-start gap-2">
         <button

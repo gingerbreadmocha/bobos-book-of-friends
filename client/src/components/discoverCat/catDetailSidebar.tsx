@@ -13,11 +13,7 @@ type CatDetailSidebarProps = {
   onClose: () => void;
 };
 
-export function CatDetailSidebar({
-  cat,
-  open,
-  onClose,
-}: CatDetailSidebarProps) {
+export function CatDetailSidebar({ cat, open, onClose }: CatDetailSidebarProps) {
   const navigate = useNavigate();
 
   const pictureSrc = cat?.avatarUrl ? cat.avatarUrl : getRandomAvatar();
@@ -44,11 +40,7 @@ export function CatDetailSidebar({
             <>
               <DialogPrimitive.Close
                 render={
-                  <Button
-                    variant="ghost"
-                    size="icon-sm"
-                    className="absolute top-3 right-3"
-                  />
+                  <Button variant="ghost" size="icon-sm" className="absolute top-3 right-3" />
                 }
               >
                 <XIcon />
@@ -58,26 +50,19 @@ export function CatDetailSidebar({
               <div className="flex flex-col items-center pt-10">
                 <img
                   src={pictureSrc}
-                  alt={
-                    cat.avatarUrl ? `${cat.name}'s photo` : `${cat.name} avatar`
-                  }
+                  alt={cat.avatarUrl ? `${cat.name}'s photo` : `${cat.name} avatar`}
                   className="h-44 w-44 rounded-full shrink-0 object-cover"
                 />
                 <DialogPrimitive.Title className="mt-4 text-2xl font-semibold text-foreground">
                   {cat.name}
                 </DialogPrimitive.Title>
                 {cat.owner && (
-                  <p className="mt-1 text-sm text-foreground-subtle">
-                    by {cat.owner.username}
-                  </p>
+                  <p className="mt-1 text-sm text-foreground-subtle">by {cat.owner.username}</p>
                 )}
               </div>
 
               {personalityTags.length > 0 && (
-                <section
-                  className="mt-6"
-                  aria-labelledby="cat-sidebar-tags-heading"
-                >
+                <section className="mt-6" aria-labelledby="cat-sidebar-tags-heading">
                   <h3
                     id="cat-sidebar-tags-heading"
                     className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle"
@@ -91,10 +76,7 @@ export function CatDetailSidebar({
                     {personalityTags.map((tag) => (
                       <li
                         key={tag.id}
-                        className={cn(
-                          "rounded-full px-3 py-1 text-sm font-medium",
-                          tag.className,
-                        )}
+                        className={cn("rounded-full px-3 py-1 text-sm font-medium", tag.className)}
                       >
                         {tag.label}
                       </li>
@@ -103,10 +85,7 @@ export function CatDetailSidebar({
                 </section>
               )}
 
-              <section
-                className="mt-6"
-                aria-labelledby="cat-sidebar-about-heading"
-              >
+              <section className="mt-6" aria-labelledby="cat-sidebar-about-heading">
                 <h3
                   id="cat-sidebar-about-heading"
                   className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle"
@@ -118,10 +97,7 @@ export function CatDetailSidebar({
                 </p>
               </section>
 
-              <section
-                className="mt-6"
-                aria-labelledby="cat-sidebar-about-heading"
-              >
+              <section className="mt-6" aria-labelledby="cat-sidebar-about-heading">
                 <h3
                   id="cat-sidebar-about-heading"
                   className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle"

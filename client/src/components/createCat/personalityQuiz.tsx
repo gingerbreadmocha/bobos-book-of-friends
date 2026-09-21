@@ -74,13 +74,7 @@ const QUIZ_SECTIONS: QuizSection[] = [
       {
         id: "favoriteActivity",
         prompt: "What's their favorite activity?",
-        options: [
-          "Sleeping",
-          "Playing",
-          "Eating",
-          "Watching the world",
-          "Getting attention",
-        ],
+        options: ["Sleeping", "Playing", "Eating", "Watching the world", "Getting attention"],
       },
       {
         id: "whenWantingSomething",
@@ -123,9 +117,7 @@ const OPTION_GRID_COLUMNS: Record<number, string> = {
 
 function optionGridClassName(optionCount: number) {
   // Up to 3 options fit on a single row; more than 3 wrap into 2 columns.
-  return optionCount <= 3
-    ? OPTION_GRID_COLUMNS[Math.max(optionCount, 1)]
-    : "grid-cols-2";
+  return optionCount <= 3 ? OPTION_GRID_COLUMNS[Math.max(optionCount, 1)] : "grid-cols-2";
 }
 
 type PersonalityQuizProps = {
@@ -141,27 +133,18 @@ export function PersonalityQuiz({ answers, onChange }: PersonalityQuizProps) {
   return (
     <div className="mt-4 space-y-8">
       <p className="text-foreground-soft">
-        Pick the answer that fits your cat best &mdash; there are no wrong
-        answers!
+        Pick the answer that fits your cat best &mdash; there are no wrong answers!
       </p>
       {QUIZ_SECTIONS.map((section) => (
-        <section
-          key={section.id}
-          aria-labelledby={`quiz-${section.id}-heading`}
-        >
-          <h3
-            id={`quiz-${section.id}-heading`}
-            className="text-lg font-semibold text-foreground"
-          >
+        <section key={section.id} aria-labelledby={`quiz-${section.id}-heading`}>
+          <h3 id={`quiz-${section.id}-heading`} className="text-lg font-semibold text-foreground">
             {section.title}
           </h3>
 
           <div className="mt-3 space-y-6">
             {section.questions.map((question) => (
               <fieldset key={question.id}>
-                <legend className="font-medium text-foreground-soft">
-                  {question.prompt}
-                </legend>
+                <legend className="font-medium text-foreground-soft">{question.prompt}</legend>
                 <RadioGroup
                   name={question.id}
                   value={answers[question.id]}

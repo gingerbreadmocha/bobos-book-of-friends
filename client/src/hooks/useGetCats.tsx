@@ -43,15 +43,11 @@ export function useGetCats() {
 
       const data = (await response.json()) as GetCatsResponse;
       // Page 1 replaces the list; later pages append for infinite scroll.
-      setCats((prevCats) =>
-        page === 1 ? data.cats : [...prevCats, ...data.cats],
-      );
+      setCats((prevCats) => (page === 1 ? data.cats : [...prevCats, ...data.cats]));
       setCurrentPage(page);
       setHasMore(data.pagination.hasNext);
     } catch (err) {
-      console.error(
-        err instanceof Error ? err.message : "Failed to load cats.",
-      );
+      console.error(err instanceof Error ? err.message : "Failed to load cats.");
     } finally {
       setLoading(false);
     }

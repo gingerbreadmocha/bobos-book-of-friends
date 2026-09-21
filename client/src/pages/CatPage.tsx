@@ -25,9 +25,7 @@ export function CatPage() {
               alt={`${cat.name} avatar`}
               className="mx-auto h-16 w-16 rounded-full object-cover"
             />
-            <p className="text-xl font-semibold text-foreground">
-              Chatting with {cat.name}
-            </p>
+            <p className="text-xl font-semibold text-foreground">Chatting with {cat.name}</p>
             <div className="mt-4 flex-1 overflow-hidden">
               <ChatRoom key={cat.id} cat={cat} />
             </div>

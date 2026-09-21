@@ -1,10 +1,4 @@
-import {
-  BrowserRouter,
-  Navigate,
-  Outlet,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar";
 import { CatPage } from "./pages/CatPage";
 import { DiscoverPage } from "./pages/DiscoverPage";
@@ -32,16 +26,16 @@ function App() {
   return (
     <BrowserRouter>
       <UserProvider>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<Navigate to="/cat" replace />} />
-          <Route path="/cat" element={<CatPage />} />
-          <Route path="/cat/:catId" element={<CatPage />} />
-          <Route path="/discover" element={<DiscoverPage />} />
-          <Route path="/mycats" element={<MyCatsPage />} />
-          <Route path="/create-cat" element={<CreateCatPage />} />
-        </Route>
-      </Routes>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route index element={<Navigate to="/cat" replace />} />
+            <Route path="/cat" element={<CatPage />} />
+            <Route path="/cat/:catId" element={<CatPage />} />
+            <Route path="/discover" element={<DiscoverPage />} />
+            <Route path="/mycats" element={<MyCatsPage />} />
+            <Route path="/create-cat" element={<CreateCatPage />} />
+          </Route>
+        </Routes>
       </UserProvider>
     </BrowserRouter>
   );

@@ -15,11 +15,7 @@ export default defineConfig(({ mode }) => {
         "@": path.resolve(import.meta.dirname, "./src"),
       },
     },
-    plugins: [
-      react(),
-      tailwindcss(),
-      babel({ presets: [reactCompilerPreset()] }),
-    ],
+    plugins: [react(), tailwindcss(), babel({ presets: [reactCompilerPreset()] })],
     server: {
       proxy: {
         "/api": apiTarget,

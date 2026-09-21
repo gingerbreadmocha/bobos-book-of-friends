@@ -16,9 +16,7 @@ export type PersonalityTag = {
 };
 
 /** Returns every answered personality question as a pill tag. */
-export function getAllPersonalityTags(
-  personality: Record<string, unknown>,
-): PersonalityTag[] {
+export function getAllPersonalityTags(personality: Record<string, unknown>): PersonalityTag[] {
   return Object.entries(PERSONALITY_TAG_COLORS).flatMap(([id, className]) => {
     const value = personality[id];
     if (typeof value !== "string" || value.trim() === "") return [];

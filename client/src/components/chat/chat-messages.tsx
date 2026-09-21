@@ -10,9 +10,7 @@ export function ChatMessages({ messages }: { messages: ChatMessage[] }) {
       {messages.map((message) => (
         <div
           key={message.id}
-          className={
-            message.role === "user" ? "flex justify-end" : "flex justify-start"
-          }
+          className={message.role === "user" ? "flex justify-end" : "flex justify-start"}
         >
           <p
             className={

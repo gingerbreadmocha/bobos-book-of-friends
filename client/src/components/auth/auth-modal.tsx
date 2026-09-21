@@ -1,10 +1,5 @@
 import { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { LoginForm } from "./login-form";
 import { SignUpForm } from "./signup-form";
@@ -49,8 +44,8 @@ export function AuthModal({ open, onOpenChange, initialMode = "login" }: AuthMod
               Welcome to CatChat!
             </h2>
             <p className="mt-3 text-sm text-muted-foreground">
-              Create an account to save your favorite cats, chat with them, and discover
-              more furry friends!
+              Create an account to save your favorite cats, chat with them, and discover more furry
+              friends!
             </p>
           </div>
 
@@ -116,4 +111,3 @@ export function AuthModal({ open, onOpenChange, initialMode = "login" }: AuthMod
     </Dialog>
   );
 }
-

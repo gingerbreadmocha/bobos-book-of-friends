@@ -25,9 +25,7 @@ export function useGetCat(catId: string | undefined) {
         setCat(data);
         setFailedId(null);
       } catch (err) {
-        console.error(
-          err instanceof Error ? err.message : "Failed to load the cat.",
-        );
+        console.error(err instanceof Error ? err.message : "Failed to load the cat.");
         setCat(null);
         setFailedId(catId);
       }

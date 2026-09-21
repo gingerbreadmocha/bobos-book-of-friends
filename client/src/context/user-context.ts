@@ -29,8 +29,7 @@ export type PublicUser = {
 
 /** Credentials accepted by POST /api/login. */
 export type LoginCredentials =
-  | { email: string; password: string }
-  | { username: string; password: string };
+  { email: string; password: string } | { username: string; password: string };
 
 /** Credentials accepted by POST /api/create-account. */
 export type SignUpCredentials = {

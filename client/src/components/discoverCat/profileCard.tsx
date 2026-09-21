@@ -28,10 +28,7 @@ export function ProfileCard({ cat, onChat, onSelect }: ProfileCardProps) {
   const navigate = useNavigate();
 
   const pictureSrc = cat.avatarUrl ? cat.avatarUrl : getRandomAvatar();
-  const personalityTags = useMemo(
-    () => pickRandomTags(cat.personality),
-    [cat.personality],
-  );
+  const personalityTags = useMemo(() => pickRandomTags(cat.personality), [cat.personality]);
 
   const handleChat = (event: MouseEvent<HTMLButtonElement>) => {
     // Clicking "Chat" is an action inside the card, so don't also open the
@@ -74,22 +71,14 @@ export function ProfileCard({ cat, onChat, onSelect }: ProfileCardProps) {
       <div className="flex flex-1 flex-col p-4">
         <h2 className="text-xl font-semibold text-foreground">{cat.name}</h2>
         {cat.owner && (
-          <p className="mt-1 text-sm text-foreground-subtle">
-            by {cat.owner.username}
-          </p>
+          <p className="mt-1 text-sm text-foreground-subtle">by {cat.owner.username}</p>
         )}
         {personalityTags.length > 0 && (
-          <ul
-            aria-label={`${cat.name}'s personality`}
-            className="mt-3 flex flex-wrap gap-2"
-          >
+          <ul aria-label={`${cat.name}'s personality`} className="mt-3 flex flex-wrap gap-2">
             {personalityTags.map((tag) => (
               <li
                 key={tag.id}
-                className={cn(
-                  "rounded-full px-3 py-1 text-sm font-medium",
-                  tag.className,
-                )}
+                className={cn("rounded-full px-3 py-1 text-sm font-medium", tag.className)}
               >
                 {tag.label}
               </li>

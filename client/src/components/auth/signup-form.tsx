@@ -81,7 +81,11 @@ export function SignUpForm({ onSuccess }: SignUpFormProps) {
         name="email"
         validators={{
           onChange: ({ value }) =>
-            !value ? "Email is required." : !value.includes("@") ? "Enter a valid email." : undefined,
+            !value
+              ? "Email is required."
+              : !value.includes("@")
+                ? "Enter a valid email."
+                : undefined,
         }}
       >
         {(field) => (
@@ -136,11 +140,7 @@ export function SignUpForm({ onSuccess }: SignUpFormProps) {
                 className="absolute top-1/2 right-1 size-8 -translate-y-1/2 rounded-full text-muted-foreground hover:text-foreground"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
-                {showPassword ? (
-                  <EyeOffIcon className="size-4" />
-                ) : (
-                  <EyeIcon className="size-4" />
-                )}
+                {showPassword ? <EyeOffIcon className="size-4" /> : <EyeIcon className="size-4" />}
               </Button>
             </div>
             {field.state.meta.errors.length > 0 && (
