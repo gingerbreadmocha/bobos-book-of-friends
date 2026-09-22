@@ -31,7 +31,7 @@ export function RecentChats({ activeCatId, onSelectChat }: RecentChatsProps) {
   };
 
   return (
-    <aside className="flex w-full shrink-0 flex-col overflow-hidden rounded-2xl border-2 border-border bg-white/70 p-4 md:w-80">
+    <aside className="flex h-full w-full shrink-0 flex-col overflow-hidden p-4 md:w-80 md:rounded-2xl md:border-2 md:border-border md:bg-white/70">
       <h2 className="px-1 text-sm font-semibold uppercase tracking-wider text-foreground-subtle">
         Recent chats
       </h2>
