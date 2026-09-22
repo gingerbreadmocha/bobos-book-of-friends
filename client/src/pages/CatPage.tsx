@@ -8,7 +8,7 @@ export function CatPage() {
   const { catId } = useParams();
   const { cat, loading, notFound } = useGetCat(catId);
 
-  const pictureSrc = cat?.avatarUrl ? cat.avatarUrl : getRandomAvatar();
+  const pictureSrc = cat?.avatarUrl ? `/${cat.avatarUrl}` : getRandomAvatar();
 
   return (
     <section className="w-full min-h-dvh h-dvh flex flex-col">

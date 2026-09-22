@@ -42,6 +42,8 @@ export function useCreateCat() {
           throw new Error(body?.error ?? "Failed to create cat.");
         }
         return (await response.json()) as Cat;
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to create cat.");
       } finally {
         setIsSubmitting(false);
       }

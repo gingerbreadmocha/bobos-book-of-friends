@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { AvatarUploader } from "./avatarUploader";
 import { PersonalityQuiz, type PersonalityAnswers } from "./personalityQuiz";
 import { useCreateCat } from "@/hooks/useCreateCat";
@@ -9,8 +10,9 @@ export function CreateCatForm() {
   const [description, setDescription] = useState("");
   const [quizAnswers, setQuizAnswers] = useState<PersonalityAnswers>({});
   const { error, createCat } = useCreateCat();
+  const navigate = useNavigate();
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const body = {
       name,
@@ -20,7 +22,8 @@ export function CreateCatForm() {
       popularity: 0,
     };
 
-    createCat(body);
+    const cat = await createCat(body);
+    if (cat) navigate("/mycats");
   };
 
   useEffect(() => {
