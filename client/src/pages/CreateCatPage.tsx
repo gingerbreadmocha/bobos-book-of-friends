@@ -5,7 +5,7 @@ export function CreateCatPage() {
   return (
     <section className="w-full max-w-3xl text-center m-auto">
       <CreateCatTitle />
-      <div className="mt-8 mx-4 md:mx-0 rounded-2xl border-2 border-dashed border-input bg-white/60 text-left">
+      <div className="mt-8 mx-4 md:mx-auto rounded-2xl border-2 border-dashed border-input bg-white/60 text-left">
         <CreateCatForm />
       </div>
     </section>

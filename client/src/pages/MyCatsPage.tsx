@@ -24,14 +24,14 @@ export function MyCatsPage() {
         <p className="mt-3 text-foreground-soft">The cats you have adopted and can chat with.</p>
       </div>
 
-      <div className="mt-8 mx-4 md:mx-0 rounded-2xl border-2 border-dashed border-input bg-white/60 p-10">
+      <div className="mt-8 mx-4 md:mx-auto rounded-2xl border-2 border-dashed border-input bg-white/60 p-10 max-w-7xl">
         {(loading || !isServerReady) && (
           <div className="flex justify-center text-center items-center m-auto">
             <p>Please wait! The cats just heard the crunchies alarm. They're on their way! </p>
           </div>
         )}
         {!loading && isServerReady && cats.length > 0 && (
-          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
+          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {cats.map((cat) => (
               <li key={cat.id}>
                 <ProfileCard cat={cat} onSelect={handleSelectCat} />
