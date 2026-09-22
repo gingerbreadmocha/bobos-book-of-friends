@@ -42,7 +42,7 @@ export const CatList = () => {
 
   return (
     <>
-      <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
         {cats.map((cat) => (
           <li key={cat.id}>
             <ProfileCard cat={cat} onSelect={handleSelectCat} />
