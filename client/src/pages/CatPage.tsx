@@ -6,12 +6,18 @@ import { ChatRoom } from "@/components/chat/chat-room";
 import { RecentChats } from "@/components/chat/recent-chats";
 import { cn } from "@/lib/utils";
 
+const sanitizedAvatarUrl = (avatarUrl: string) => {
+  if (avatarUrl.includes("createCat/avatars") && avatarUrl.charAt(0) !== "/")
+    return `/${avatarUrl}`;
+  return avatarUrl;
+};
+
 export function CatPage() {
   const { catId } = useParams();
   const navigate = useNavigate();
   const { cat, loading, notFound } = useGetCat(catId);
 
-  const pictureSrc = cat?.avatarUrl ? `/${cat.avatarUrl}` : getRandomAvatar();
+  const pictureSrc = cat?.avatarUrl ? sanitizedAvatarUrl(cat.avatarUrl) : getRandomAvatar();
   const inChat = Boolean(catId);
 
   return (
