@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import type { Cat } from "./useGetCats";
 import { useUser } from "@/context/user-context";
+import { API_BASE_URL } from "@/lib/api";
 
 export type CreateCatInput = {
   name: string;
@@ -28,7 +29,7 @@ export function useCreateCat() {
         ...newCat,
       };
       try {
-        const response = await fetch("/api/cats", {
+        const response = await fetch(`${API_BASE_URL}/api/cats`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

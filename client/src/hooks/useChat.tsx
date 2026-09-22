@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import type { ChatMessage } from "@/components/chat/chat-messages";
 import { useUser } from "@/context/user-context";
+import { API_BASE_URL } from "@/lib/api";
 import {
   loadGuestChats,
   saveGuestChat,
@@ -40,7 +41,7 @@ export function useChat(catId: string, catName: string) {
 
     const loadHistory = async () => {
       try {
-        const response = await fetch(`/api/chat/history/${catId}`, {
+        const response = await fetch(`${API_BASE_URL}/api/chat/history/${catId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!response.ok) return;
@@ -70,7 +71,7 @@ export function useChat(catId: string, catName: string) {
         const headers: Record<string, string> = { "Content-Type": "application/json" };
         if (isAuthenticated) headers.Authorization = `Bearer ${token}`;
 
-        const response = await fetch("/api/chat", {
+        const response = await fetch(`${API_BASE_URL}/api/chat`, {
           method: "POST",
           headers,
           body: JSON.stringify({ catId, message }),

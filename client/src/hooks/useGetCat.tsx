@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Cat } from "@/hooks/useGetCats";
+import { API_BASE_URL } from "@/lib/api";
 
 export function useGetCat(catId: string | undefined) {
   const [cat, setCat] = useState<Cat | null>(null);
@@ -10,7 +11,7 @@ export function useGetCat(catId: string | undefined) {
 
     const fetchCat = async () => {
       try {
-        const response = await fetch(`/api/cats/${catId}`, {
+        const response = await fetch(`${API_BASE_URL}/api/cats/${catId}`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });

@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { API_BASE_URL } from "@/lib/api";
 
 /** Authentication parameters returned by `/api/imagekit/auth` for direct uploads. */
 export type ImageKitAuthResponse = {
@@ -10,7 +11,7 @@ export type ImageKitAuthResponse = {
 
 export function useImageKitAuth() {
   return useCallback(async (): Promise<ImageKitAuthResponse> => {
-    const authResponse = await fetch("/api/imagekit/auth", {
+    const authResponse = await fetch(`${API_BASE_URL}/api/imagekit/auth`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });

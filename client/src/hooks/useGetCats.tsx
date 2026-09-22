@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { API_BASE_URL } from "@/lib/api";
 
 export type Cat = {
   id: string;
@@ -33,7 +34,7 @@ export function useGetCats() {
 
   const getCats = useCallback(async (page: number) => {
     try {
-      const response = await fetch(`/api/cats?page=${page}`, {
+      const response = await fetch(`${API_BASE_URL}/api/cats?page=${page}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });

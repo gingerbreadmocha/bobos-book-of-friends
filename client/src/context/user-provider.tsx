@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState, type ReactNode } from "react";
 import { AuthModal } from "@/components/auth/auth-modal.tsx";
+import { API_BASE_URL } from "@/lib/api";
 import {
   UserContext,
   type LoginCredentials,
@@ -23,7 +24,7 @@ const USER_STORAGE_KEY = "bobo-guestbook-user";
 
 /** POSTs JSON and returns the parsed body, throwing the API's error message on failure. */
 async function postJson(path: string, body: unknown): Promise<unknown> {
-  const response = await fetch(path, {
+  const response = await fetch(`${API_BASE_URL}${path}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),

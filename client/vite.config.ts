@@ -7,7 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const apiTarget = env.API_PROXY_TARGET || "http://localhost:3000";
+  const apiTarget = env.VITE_API_PROXY_TARGET || env.API_PROXY_TARGET || "http://localhost:3000";
 
   return {
     resolve: {
@@ -16,6 +16,11 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [react(), tailwindcss(), babel({ presets: [reactCompilerPreset()] })],
+    define: {
+      // Expose the proxy target to client code so production (which has no dev
+      // proxy) calls the real API server instead of the static host.
+      "import.meta.env.VITE_API_PROXY_TARGET": JSON.stringify(apiTarget),
+    },
     server: {
       proxy: {
         "/api": apiTarget,

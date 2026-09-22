@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Cat } from "./useGetCats";
 import { useUser } from "@/context/user-context";
+import { API_BASE_URL } from "@/lib/api";
 
 export type MyCatsResponse = {
   cats: Cat[];
@@ -20,7 +21,7 @@ export function useMyGetCats() {
     }
 
     try {
-      const response = await fetch("/api/my-cats", {
+      const response = await fetch(`${API_BASE_URL}/api/my-cats`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

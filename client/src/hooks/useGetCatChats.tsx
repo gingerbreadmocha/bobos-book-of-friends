@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import type { Cat } from "./useGetCats";
 import { useUser } from "@/context/user-context";
 import { getGuestChattedCats } from "@/lib/guest-chat-storage";
+import { API_BASE_URL } from "@/lib/api";
 
 export type ChattedCat = Cat & {
   lastMessage: {
@@ -55,7 +56,7 @@ export function useGetCatChats() {
     }
 
     try {
-      const response = await fetch("/api/cats/chatted", {
+      const response = await fetch(`${API_BASE_URL}/api/cats/chatted`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
