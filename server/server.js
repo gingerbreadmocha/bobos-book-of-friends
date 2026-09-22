@@ -32,10 +32,17 @@ app.use("/api", catsRouter);
 
 app.use("/api", chatRouter);
 
+// Probe used by the client to tell when the server is ready; must be registered
+// before the `/api` fallback so it doesn't get swallowed by the 404.
+app.use("/api/heartbeat", async (req, res) => {
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+    res.status(200).json({ message: "The cats have run over!" });
+});
+
 // Fallback for unhandled /api routes.
 app.use("/api", (req, res) => {
     res.status(404).json({ error: "Not found" });
-});
+})
 
 // Central error handler: Express forwards thrown/rejected errors here.
 app.use((err, req, res, _next) => {

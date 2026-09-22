@@ -5,6 +5,7 @@ import { DiscoverPage } from "./pages/DiscoverPage";
 import { MyCatsPage } from "./pages/MyCatsPage";
 import { CreateCatPage } from "./pages/CreateCatPage";
 import { UserProvider } from "./context/user-provider";
+import { HeartbeatProvider } from "./context/heartbeat-provider";
 
 function Layout() {
   return (
@@ -25,18 +26,20 @@ function Layout() {
 function App() {
   return (
     <BrowserRouter>
-      <UserProvider>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route index element={<Navigate to="/cat" replace />} />
-            <Route path="/cat" element={<CatPage />} />
-            <Route path="/cat/:catId" element={<CatPage />} />
-            <Route path="/discover" element={<DiscoverPage />} />
-            <Route path="/mycats" element={<MyCatsPage />} />
-            <Route path="/create-cat" element={<CreateCatPage />} />
-          </Route>
-        </Routes>
-      </UserProvider>
+      <HeartbeatProvider>
+        <UserProvider>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route index element={<Navigate to="/cat" replace />} />
+              <Route path="/cat" element={<CatPage />} />
+              <Route path="/cat/:catId" element={<CatPage />} />
+              <Route path="/discover" element={<DiscoverPage />} />
+              <Route path="/mycats" element={<MyCatsPage />} />
+              <Route path="/create-cat" element={<CreateCatPage />} />
+            </Route>
+          </Routes>
+        </UserProvider>
+      </HeartbeatProvider>
     </BrowserRouter>
   );
 }

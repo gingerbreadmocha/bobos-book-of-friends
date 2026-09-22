@@ -3,9 +3,11 @@ import { useMyGetCats } from "@/hooks/useMyGetCats";
 import type { Cat } from "@/hooks/useGetCats";
 import { ProfileCard } from "@/components/discoverCat/profileCard";
 import { CatDetailSidebar } from "@/components/discoverCat/catDetailSidebar";
+import { useHeartbeat } from "@/context/heartbeat-context";
 
 export function MyCatsPage() {
   const { cats, loading } = useMyGetCats();
+  const { isServerReady } = useHeartbeat();
 
   const [selectedCat, setSelectedCat] = useState<Cat | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -23,8 +25,12 @@ export function MyCatsPage() {
       </div>
 
       <div className="mt-8 mx-4 md:mx-0 rounded-2xl border-2 border-dashed border-input bg-white/60 p-10">
-        {loading && <p>Please wait! Your cats are on the way. </p>}
-        {!loading && cats.length > 0 && (
+        {(loading || !isServerReady) && (
+          <div className="flex justify-center text-center items-center m-auto">
+            <p>Please wait! The cats just heard the crunchies alarm. They're on their way! </p>
+          </div>
+        )}
+        {!loading && isServerReady && cats.length > 0 && (
           <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
             {cats.map((cat) => (
               <li key={cat.id}>

@@ -1,6 +1,8 @@
 import { CatList } from "@/components/discoverCat/catList";
+import { useHeartbeat } from "@/context/heartbeat-context";
 
 export function DiscoverPage() {
+  const { isServerReady } = useHeartbeat();
   return (
     <section className="w-full text-center m-auto">
       <div className="flex flex-col justify-center items-center">
@@ -11,7 +13,13 @@ export function DiscoverPage() {
         </p>
       </div>
       <div className="mt-8 mx-4 md:mx-0 rounded-2xl border-2 border-dashed border-input bg-white/60 p-10">
-        <CatList />
+        {!isServerReady ? (
+          <div className="flex justify-center text-center items-center m-auto">
+            <p>Please wait! The cats just heard the crunchies alarm. They're on their way! </p>
+          </div>
+        ) : (
+          <CatList />
+        )}
       </div>
     </section>
   );
