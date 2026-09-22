@@ -45,10 +45,8 @@ router.get("/chat/history/:catId", async (req, res) => {
  * Returns the cat's reply.
  */
 router.post("/chat", async (req, res) => {
+    // Guests chat anonymously; conversations are only persisted for signed-in users.
     const userId = getAuthenticatedUserId(req);
-    if (!userId) {
-        return res.status(401).json({ error: "Sign in to chat with a cat." });
-    }
 
     const { catId, message } = req.body;
 

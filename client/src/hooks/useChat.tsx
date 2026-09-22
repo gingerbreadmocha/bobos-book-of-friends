@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import type { ChatMessage } from "@/components/chat/chat-messages";
 import { useUser } from "@/context/user-context";
+import {
+  loadGuestChats,
+  saveGuestChat,
+  type GuestChatLog,
+} from "@/lib/guest-chat-storage";
 
 type ChatResponse = {
   cat: { id: string; name: string };
@@ -12,16 +17,24 @@ type HistoryResponse = {
 };
 
 let nextMessageId = 0;
-const createMessageId = () => `msg-${++nextMessageId}`;
+const createMessage = (role: "user" | "cat", text: string): GuestChatLog => ({
+  id: `msg-${++nextMessageId}`,
+  role,
+  text,
+  createdAt: new Date().toISOString(),
+});
 
-export function useChat(catId: string) {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+export function useChat(catId: string, catName: string) {
+  const { token, isAuthenticated } = useUser();
+  // Guests start from whatever was saved locally for this cat.
+  const [messages, setMessages] = useState<ChatMessage[]>(
+    () => (isAuthenticated ? [] : loadGuestChats()[catName] ?? []),
+  );
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { token } = useUser();
 
   useEffect(() => {
-    if (!token) return;
+    if (!isAuthenticated) return;
 
     let cancelled = false;
 
@@ -43,26 +56,23 @@ export function useChat(catId: string) {
     return () => {
       cancelled = true;
     };
-  }, [catId, token]);
+  }, [catId, token, isAuthenticated]);
 
   const sendMessage = useCallback(
     async (message: string) => {
       setError(null);
-      setMessages((prev) => [...prev, { id: createMessageId(), role: "user", text: message }]);
+      const userMessages = [...messages, createMessage("user", message)];
+      setMessages(userMessages);
+      if (!isAuthenticated) saveGuestChat(catName, catId, userMessages);
       setSending(true);
 
       try {
-        if (!token) {
-          setError("Sign in to chat with your cat.");
-          return;
-        }
+        const headers: Record<string, string> = { "Content-Type": "application/json" };
+        if (isAuthenticated) headers.Authorization = `Bearer ${token}`;
 
         const response = await fetch("/api/chat", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
+          headers,
           body: JSON.stringify({ catId, message }),
         });
 
@@ -73,7 +83,9 @@ export function useChat(catId: string) {
         }
 
         const data = (await response.json()) as ChatResponse;
-        setMessages((prev) => [...prev, { id: createMessageId(), role: "cat", text: data.reply }]);
+        const replyMessages = [...userMessages, createMessage("cat", data.reply)];
+        setMessages(replyMessages);
+        if (!isAuthenticated) saveGuestChat(catName, catId, replyMessages);
       } catch (err) {
         console.error(err instanceof Error ? err.message : "Failed to get a reply from the cat.");
         setError("The cat didn't answer. Please try again.");
@@ -81,7 +93,7 @@ export function useChat(catId: string) {
         setSending(false);
       }
     },
-    [catId, token],
+    [catId, catName, token, isAuthenticated, messages],
   );
 
   return { messages, sendMessage, sending, error };

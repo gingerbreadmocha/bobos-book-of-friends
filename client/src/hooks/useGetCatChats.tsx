@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import type { Cat } from "./useGetCats";
 import { useUser } from "@/context/user-context";
+import { getGuestChattedCats } from "@/lib/guest-chat-storage";
 
 export type ChattedCat = Cat & {
   lastMessage: {
@@ -15,6 +16,31 @@ export type CatChatsResponse = {
   cats: ChattedCat[];
 };
 
+/** For not logged in users- grabs their chat from localStorage */
+function guestChattedCats(): ChattedCat[] {
+  return getGuestChattedCats().map(({ name, id, logs }) => {
+    const last = logs[logs.length - 1];
+    return {
+      id,
+      name,
+      avatarUrl: null,
+      personality: {},
+      ownerId: "",
+      description: "",
+      owner: { id: "", username: "" },
+      popularity: 0,
+      createdAt: "",
+      updatedAt: "",
+      lastMessage: {
+        id: last.id,
+        role: last.role,
+        text: last.text,
+        createdAt: last.createdAt ?? new Date(0).toISOString(),
+      },
+    } satisfies ChattedCat;
+  });
+}
+
 export function useGetCatChats() {
   const [loading, setLoading] = useState(true);
   const [cats, setCats] = useState<ChattedCat[]>([]);
@@ -22,8 +48,8 @@ export function useGetCatChats() {
 
   const getCatChats = useCallback(async () => {
     if (!isAuthenticated) {
-      // Not signed in yet, or signed out — clear and stay idle.
-      setCats([]);
+      // Guests see the chats saved locally for this browser.
+      setCats(guestChattedCats());
       setLoading(false);
       return;
     }

@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { LockIcon } from "lucide-react";
 import { useUser } from "@/context/user-context";
 import { Button } from "@/components/ui/button";
 
@@ -9,6 +10,10 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
       ? "bg-sidebar-accent text-sidebar-accent-foreground"
       : "text-sidebar-foreground hover:bg-sidebar focus:bg-sidebar-accent active:bg-sidebar-accent",
   ].join(" ");
+
+/** Signed-out tabs stay muted and non-navigating until the user signs in. */
+const lockedNavLinkClass =
+  "flex items-center px-4 py-2.5 rounded-lg font-medium transition-colors duration-150 outline-none text-muted-foreground hover:bg-sidebar focus:bg-sidebar-accent";
 
 /** Shared styling for the account button so the signed-in/out states match. */
 const accountButtonClass =
@@ -76,7 +81,17 @@ export function Sidebar() {
           Discover
         </NavLink>
 
-        <NavLink to="/mycats" className={navLinkClass}>
+        <NavLink
+          to="/mycats"
+          className={isAuthenticated ? navLinkClass : lockedNavLinkClass}
+          aria-disabled={!isAuthenticated}
+          onClick={(event) => {
+            if (!isAuthenticated) {
+              event.preventDefault();
+              showAuth();
+            }
+          }}
+        >
           <svg
             className="size-6 mr-4"
             viewBox="0 0 24 24"
@@ -90,9 +105,20 @@ export function Sidebar() {
             <path d="M18 10.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
           </svg>
           My cats
+          {!isAuthenticated && <LockIcon className="size-4 ml-2" aria-hidden="true" />}
         </NavLink>
 
-        <NavLink to="/create-cat" className={navLinkClass}>
+        <NavLink
+          to="/create-cat"
+          className={isAuthenticated ? navLinkClass : lockedNavLinkClass}
+          aria-disabled={!isAuthenticated}
+          onClick={(event) => {
+            if (!isAuthenticated) {
+              event.preventDefault();
+              showAuth();
+            }
+          }}
+        >
           <svg
             className="size-6 mr-4"
             aria-hidden="true"
@@ -111,6 +137,7 @@ export function Sidebar() {
             />
           </svg>
           Create a Cat
+          {!isAuthenticated && <LockIcon className="size-4 ml-1" aria-hidden="true" />}
         </NavLink>
       </nav>
 
