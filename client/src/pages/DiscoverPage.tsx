@@ -10,7 +10,7 @@ export function DiscoverPage() {
           find your favorites.
         </p>
       </div>
-      <div className="mt-8 rounded-2xl border-2 border-dashed border-input bg-white/60 p-10">
+      <div className="mt-8 mx-4 md:mx-0 rounded-2xl border-2 border-dashed border-input bg-white/60 p-10">
         <CatList />
       </div>
     </section>
